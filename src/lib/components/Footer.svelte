@@ -24,7 +24,7 @@
 					<span class="grid size-10 place-items-center rounded-xl bg-flame text-white">
 						<Icon name="sofa" class="size-6" />
 					</span>
-					<span class="font-serif text-[22px] font-bold text-ink">Furniture</span>
+					<span class="font-display text-[22px] font-bold text-ink">Furniture</span>
 				</a>
 				<p class="mt-4 max-w-xs text-sm leading-relaxed text-muted">
 					Handcrafted sofas, chairs and lighting for homes that feel considered —

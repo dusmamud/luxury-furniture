@@ -17,7 +17,7 @@
 				<Icon name="sofa" class="size-6" />
 			</span>
 			<span class="leading-none">
-				<span class="block font-serif text-[22px] font-bold tracking-tight text-ink">Furniture</span>
+				<span class="block font-display text-[22px] font-bold tracking-tight text-ink">Furniture</span>
 				<span class="block text-[10px] font-semibold tracking-[0.28em] text-flame uppercase">Make you feel luxury</span>
 			</span>
 		</a>

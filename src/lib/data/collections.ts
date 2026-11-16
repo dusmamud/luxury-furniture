@@ -4,7 +4,7 @@ export type Collection = {
 	blurb: string;
 	price: number;
 	priceNote: string;
-	image: string;
+	cutout: string;
 	alt: string;
 	size: 'large' | 'wide' | 'small';
 };
@@ -16,7 +16,7 @@ export const collections: Collection[] = [
 		blurb: 'Hand-woven rattan, cloud-soft cushions, made for slow evenings.',
 		price: 899,
 		priceNote: 'From $899 · 2-piece set',
-		image: '/images/outdoor-lounge.webp',
+		cutout: 'outdoor-chairs',
 		alt: 'Two beige woven outdoor lounge chairs with white cushions and a round wooden side table',
 		size: 'large'
 	},
@@ -26,8 +26,8 @@ export const collections: Collection[] = [
 		blurb: 'Sculptural greenery in hand-finished pots, styled for your rooms.',
 		price: 79,
 		priceNote: 'From $79 · pot included',
-		image: '/images/indoor-plants.webp',
-		alt: 'Green fiddle-leaf plant in a dark pot against a burnt-orange wall',
+		cutout: 'plant',
+		alt: 'Green fiddle-leaf plant in a dark grey pot',
 		size: 'large'
 	},
 	{
@@ -36,7 +36,7 @@ export const collections: Collection[] = [
 		blurb: 'Deep seats, feather-wrapped cushions, fabric that survives real life.',
 		price: 1299,
 		priceNote: 'From $1,299 · 3-seater',
-		image: '/images/modern-couch.webp',
+		cutout: 'modern-sofa',
 		alt: 'Modern grey three-seater couch with beige cushions and a large green plant',
 		size: 'wide'
 	},
@@ -46,7 +46,7 @@ export const collections: Collection[] = [
 		blurb: 'A sculpted accent chair with solid black legs.',
 		price: 349,
 		priceNote: 'From $349',
-		image: '/images/modern-chair.jpg',
+		cutout: 'modern-chair',
 		alt: 'Modern white chair with black splayed legs',
 		size: 'small'
 	},
@@ -56,7 +56,7 @@ export const collections: Collection[] = [
 		blurb: 'A hand-woven egg chair that floats — your reading nook, upgraded.',
 		price: 499,
 		priceNote: 'From $499',
-		image: '/images/bamboo-swing.webp',
+		cutout: 'swing-chair',
 		alt: 'Bamboo egg swing chair hanging by a chain with cushions and a throw',
 		size: 'small'
 	},
@@ -66,7 +66,7 @@ export const collections: Collection[] = [
 		blurb: 'Warm bronze dome pendant, hand-finished, dimmable glow.',
 		price: 189,
 		priceNote: 'From $189',
-		image: '/images/hanging-light.jpg',
+		cutout: 'hanging-light',
 		alt: 'Brown dome pendant hanging light glowing warm',
 		size: 'small'
 	}
