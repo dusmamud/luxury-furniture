@@ -28,6 +28,24 @@
 
 	let choice = $derived(product.option.choices[optionIdx]);
 	let unitPrice = $derived(product.price + (product.option.priceDeltas?.[optionIdx] ?? 0));
+	let productJsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'Product',
+		name: product.name,
+		description: product.description,
+		image: `https://luxury-furniture.pages.dev${product.photo}`,
+		offers: {
+			'@type': 'Offer',
+			priceCurrency: 'USD',
+			price: unitPrice,
+			availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
+		},
+		aggregateRating: {
+			'@type': 'AggregateRating',
+			ratingValue: product.rating,
+			reviewCount: product.reviewCount
+		}
+	});
 	let wished = $derived(shop.isWished(product.id));
 	let reviews = $derived(shop.getReviews(product.id));
 
@@ -104,26 +122,7 @@
 		name="description"
 		content="{product.name}: {product.blurb} Rated {product.rating.toFixed(1)} by {product.reviewCount} customers. {product.deliveryDays} delivery, {product.warranty}."
 	/>
-	<script type="application/ld+json">
-		{JSON.stringify({
-			'@context': 'https://schema.org',
-			'@type': 'Product',
-			name: product.name,
-			description: product.description,
-			image: `https://luxury-furniture.pages.dev${product.photo}`,
-			offers: {
-				'@type': 'Offer',
-				priceCurrency: 'USD',
-				price: unitPrice,
-				availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
-			},
-			aggregateRating: {
-				'@type': 'AggregateRating',
-				ratingValue: product.rating,
-				reviewCount: product.reviewCount
-			}
-		})}
-	</script>
+	{@html `<script type="application/ld+json">${JSON.stringify(productJsonLd)}</script>`}
 </svelte:head>
 
 <section class="bg-cream">
