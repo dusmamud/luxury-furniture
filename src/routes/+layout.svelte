@@ -4,6 +4,8 @@
 	import { page } from '$app/state';
 	import Header from '#lib/components/Header.svelte';
 	import Footer from '#lib/components/Footer.svelte';
+	import CartDrawer from '#lib/components/CartDrawer.svelte';
+	import Toast from '#lib/components/Toast.svelte';
 
 	let { children }: LayoutProps = $props();
 
@@ -53,3 +55,5 @@
 <Header />
 <main>{@render children()}</main>
 <Footer />
+<CartDrawer />
+<Toast />

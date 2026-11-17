@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '#lib/components/Icon.svelte';
+	import { categories, rooms } from '#lib/data/products';
 
 	let email = $state('');
 	let done = $state(false);
@@ -16,11 +17,11 @@
 	}
 </script>
 
-<footer id="contact" class="bg-[#fff1e6]">
+<footer class="bg-[#fff1e6]">
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-		<div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1.4fr]">
+		<div class="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr_1.4fr]">
 			<div>
-				<a href="#home" class="flex items-center gap-2">
+				<a href="/" class="flex items-center gap-2">
 					<span class="grid size-10 place-items-center rounded-xl bg-flame text-white">
 						<Icon name="sofa" class="size-6" />
 					</span>
@@ -42,23 +43,38 @@
 				</p>
 			</div>
 
-			<nav aria-label="About">
-				<h3 class="text-sm font-bold tracking-wide text-ink uppercase">About us</h3>
+			<nav aria-label="Shop">
+				<h3 class="text-sm font-bold tracking-wide text-ink uppercase">Shop</h3>
 				<ul class="mt-4 space-y-2.5 text-sm text-muted">
-					<li><a class="hover:text-flame" href="#about">Our story</a></li>
-					<li><a class="hover:text-flame" href="#collections">Collections</a></li>
-					<li><a class="hover:text-flame" href="#home">Showroom</a></li>
-					<li><a class="hover:text-flame" href="#home">Careers</a></li>
+					<li><a class="hover:text-flame" href="/shop">All furniture</a></li>
+					{#each categories.slice(0, 5) as c}
+						<li><a class="hover:text-flame" href="/categories/{c.slug}">{c.name}</a></li>
+					{/each}
+					<li><a class="hover:text-flame" href="/deals">Deals</a></li>
+				</ul>
+			</nav>
+
+			<nav aria-label="Rooms">
+				<h3 class="text-sm font-bold tracking-wide text-ink uppercase">Rooms</h3>
+				<ul class="mt-4 space-y-2.5 text-sm text-muted">
+					{#each rooms as r}
+						<li><a class="hover:text-flame" href="/rooms/{r.slug}">{r.name}</a></li>
+					{/each}
+					<li><a class="hover:text-flame" href="/showrooms">Visit a showroom</a></li>
 				</ul>
 			</nav>
 
 			<nav aria-label="Help">
 				<h3 class="text-sm font-bold tracking-wide text-ink uppercase">Help</h3>
 				<ul class="mt-4 space-y-2.5 text-sm text-muted">
-					<li><a class="hover:text-flame" href="#home">Delivery &amp; returns</a></li>
-					<li><a class="hover:text-flame" href="#home">Privacy policy</a></li>
-					<li><a class="hover:text-flame" href="#home">Terms of service</a></li>
-					<li><a class="hover:text-flame" href="#home">Care guides</a></li>
+					<li><a class="hover:text-flame" href="/about">Our story</a></li>
+					<li><a class="hover:text-flame" href="/delivery">Delivery &amp; white glove</a></li>
+					<li><a class="hover:text-flame" href="/returns-policy">Returns</a></li>
+					<li><a class="hover:text-flame" href="/warranty">Warranty</a></li>
+					<li><a class="hover:text-flame" href="/faq">FAQ</a></li>
+					<li><a class="hover:text-flame" href="/contact">Contact us</a></li>
+					<li><a class="hover:text-flame" href="/trade">Trade program</a></li>
+					<li><a class="hover:text-flame" href="/financing">Financing</a></li>
 				</ul>
 			</nav>
 
@@ -97,7 +113,12 @@
 
 		<div class="mt-10 flex flex-col items-center justify-between gap-3 border-t border-orange-200/70 pt-6 text-xs text-muted sm:flex-row">
 			<p>© 2026 Furniture. All rights reserved. Demo site — prices and stock are illustrative.</p>
-			<p>800 Winward Drive, Suite A, Covington, LA 70433</p>
+			<p class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1">
+				<a class="hover:text-flame" href="/privacy-policy">Privacy policy</a>
+				<a class="hover:text-flame" href="/terms">Terms of service</a>
+				<a class="hover:text-flame" href="/shipping-policy">Shipping policy</a>
+				<a class="hover:text-flame" href="/sitemap">Sitemap</a>
+			</p>
 		</div>
 	</div>
 </footer>

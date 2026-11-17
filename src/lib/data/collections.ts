@@ -51,7 +51,7 @@ export const collections: Collection[] = [
 		size: 'small'
 	},
 	{
-		slug: 'bamboo-swing-chairs',
+		slug: 'bamboo-swing-chair',
 		name: 'Bamboo Swing Chairs',
 		blurb: 'A hand-woven egg chair that floats — your reading nook, upgraded.',
 		price: 499,

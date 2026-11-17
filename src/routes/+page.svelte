@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Icon from '#lib/components/Icon.svelte';
 	import CutoutPicture from '#lib/components/CutoutPicture.svelte';
+	import ProductCard from '#lib/components/ProductCard.svelte';
 	import { reveal } from '../lib/actions/reveal';
 	import { countup } from '../lib/actions/countup';
 	import { collections, type Collection } from '../lib/data/collections';
+	import { products, rooms } from '#lib/data/products';
+	import { goto } from '$app/navigation';
 
 	let query = $state('');
 	const filtered = $derived(
@@ -14,6 +17,61 @@
 	const large = $derived(filtered.filter((c: Collection) => c.size === 'large'));
 	const wide = $derived(filtered.filter((c: Collection) => c.size === 'wide'));
 	const small = $derived(filtered.filter((c: Collection) => c.size === 'small'));
+
+	const bestsellers = products
+		.filter((p) => ['modern-couches', 'hanging-light', 'outdoor-lounge-chair', 'modern-chair'].includes(p.id))
+		.sort((a, b) => b.reviewCount - a.reviewCount);
+
+	const journal = [
+		{
+			slug: 'how-to-choose-sofa-size',
+			title: 'How to choose the right sofa size',
+			excerpt: 'Measure the room, not the sofa — the two-thirds rule, seat depth, and the doorway test.',
+			date: 'Nov 10, 2026',
+			readTime: '6 min read',
+			cover: '/images/modern-couch.webp'
+		},
+		{
+			slug: 'style-small-living-room',
+			title: '5 ways to style a small living room',
+			excerpt: 'Scale, legs, mirrors, vertical storage — and one statement piece that does the talking.',
+			date: 'Oct 28, 2026',
+			readTime: '5 min read',
+			cover: '/images/about-room.webp'
+		},
+		{
+			slug: 'caring-for-solid-oak',
+			title: 'Caring for solid oak: a simple guide',
+			excerpt: 'Dusting, spills, yearly re-oiling and sun — keep your oak rich for decades.',
+			date: 'Oct 14, 2026',
+			readTime: '4 min read',
+			cover: '/images/dining-table.webp'
+		}
+	];
+
+	const testimonials = [
+		{
+			name: 'Maya Richardson',
+			detail: 'Verified buyer — Modern Couch',
+			quote: 'We have owned it for eight months and it still looks new. The cushions have not sagged at all, and the fabric really does wipe clean.'
+		},
+		{
+			name: 'Daniel Kim',
+			detail: 'Verified buyer — Haven Oak Dining Table',
+			quote: 'The grain is beautiful and the finish feels like furniture, not plastic. Six chairs fit with room to spare — it is the table our house needed.'
+		},
+		{
+			name: 'Sofia Martinez',
+			detail: 'Verified buyer — Bamboo Swing Chair',
+			quote: 'The sway is gentle and the cushions are deep. My kids fight over it every evening. I should have bought two.'
+		}
+	];
+
+	function goSearch(e: SubmitEvent) {
+		e.preventDefault();
+		const q = query.trim();
+		goto(q ? `/shop?q=${encodeURIComponent(q)}` : '/shop');
+	}
 
 	const features = [
 		{ icon: 'truck', title: '3-day delivery', text: 'White-glove delivery, room of your choice.' },
@@ -76,7 +134,7 @@
 				</p>
 				<div class="hero-anim mt-4 sm:mt-7" style="--d: 360ms">
 					<a
-						href="#collections"
+						href="/shop"
 						class="group inline-flex min-h-10 items-center gap-2 rounded-full bg-flame px-5 py-2.5 text-xs font-bold text-white shadow-lg shadow-orange-500/30 transition hover:-translate-y-0.5 hover:bg-flame-dark sm:min-h-11 sm:px-6 sm:py-3 sm:text-sm"
 					>
 						Shop now
@@ -90,7 +148,7 @@
 		</div>
 
 		<!-- Search -->
-		<div class="mx-auto mt-10 max-w-xl" use:reveal>
+		<form class="mx-auto mt-10 max-w-xl" use:reveal onsubmit={goSearch}>
 			<label class="sr-only" for="site-search">What are you looking for?</label>
 			<div class="flex items-center gap-2 rounded-full border border-orange-200 bg-white py-1.5 pr-1.5 pl-5 shadow-sm focus-within:border-flame">
 				<Icon name="search" class="size-5 shrink-0 text-muted" />
@@ -108,13 +166,14 @@
 						onclick={() => (query = '')}>Clear</button
 					>
 				{/if}
+				<button type="submit" class="shrink-0 rounded-full bg-flame px-5 py-2.5 text-xs font-bold text-white transition hover:bg-flame-dark sm:text-sm">Search</button>
 			</div>
 			{#if query}
 				<p class="mt-2 text-center text-xs font-semibold text-muted">
-					{filtered.length} {filtered.length === 1 ? 'collection' : 'collections'} matching “{query}”
+					{filtered.length} {filtered.length === 1 ? 'collection' : 'collections'} matching “{query}” — press Search to see all products
 				</p>
 			{/if}
-		</div>
+		</form>
 
 		<!-- Stats -->
 		<div
@@ -144,6 +203,30 @@
 				</p>
 				<p class="text-[11px] font-semibold text-muted sm:text-xs">Delivery time</p>
 			</div>
+		</div>
+	</div>
+</section>
+
+<!-- ============ BESTSELLERS ============ -->
+<section class="py-14 lg:py-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-wrap items-end justify-between gap-4" use:reveal>
+			<div>
+				<h2 class="font-display text-3xl font-semibold text-ink sm:text-4xl">
+					Bestsellers <span class="text-flame">loved at home</span>
+				</h2>
+				<p class="mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+					The pieces our customers buy, keep and recommend — rated 4.7 and above.
+				</p>
+			</div>
+			<a href="/shop" class="group inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-flame px-6 py-3 text-sm font-bold text-flame transition hover:bg-flame hover:text-white">
+				Shop all furniture <Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+			</a>
+		</div>
+		<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+			{#each bestsellers as p, i (p.id)}
+				<ProductCard product={p} delay={i * 80} />
+			{/each}
 		</div>
 	</div>
 </section>
@@ -180,9 +263,9 @@
 					>
 						<div class="flex items-start justify-between gap-3 p-6 pb-2 sm:p-7 sm:pb-3">
 							<h3 class="max-w-[240px] font-display text-2xl leading-tight font-semibold text-white sm:text-[28px]">{c.name}</h3>
-							<span class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold text-flame-dark shadow">
+							<a href="/product/{c.slug}" class="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-white/95 px-4 py-2 text-xs font-bold text-flame-dark shadow">
 								Explore more <Icon name="arrow-right" class="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-							</span>
+							</a>
 						</div>
 						<div class="px-6 pb-2 sm:px-8">
 							<CutoutPicture
@@ -205,9 +288,9 @@
 						<h3 class="font-display text-2xl leading-tight font-semibold text-white sm:text-3xl">{c.name}</h3>
 						<p class="mt-3 text-sm leading-relaxed text-white/90">{c.blurb}</p>
 						<p class="mt-3 text-sm font-bold text-white">{c.priceNote}</p>
-						<span class="mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-flame-dark shadow">
+						<a href="/product/{c.slug}" class="mt-5 inline-flex w-fit items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-flame-dark shadow">
 							Explore more <Icon name="arrow-right" class="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-						</span>
+						</a>
 					</div>
 					<div class="relative flex items-end justify-center p-4 pb-0 sm:p-6 sm:pb-0">
 						<CutoutPicture
@@ -242,9 +325,9 @@
 							<h3 class="font-display text-xl font-semibold">{c.name}</h3>
 							<p class="mt-1 text-xs leading-relaxed text-white/85">{c.blurb}</p>
 							<p class="mt-2 text-sm font-bold">{c.priceNote}</p>
-							<span class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-flame-dark shadow">
+							<a href="/product/{c.slug}" class="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-2 text-xs font-bold text-flame-dark shadow">
 								Explore more <Icon name="arrow-right" class="size-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
-							</span>
+							</a>
 						</div>
 					</article>
 				{/each}
@@ -264,6 +347,37 @@
 					</div>
 				</div>
 			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ============ SHOP BY ROOM ============ -->
+<section class="py-14 lg:py-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center" use:reveal>
+			<h2 class="font-display text-3xl font-semibold text-ink sm:text-4xl">
+				Shop by <span class="text-flame">room</span>
+			</h2>
+			<p class="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+				Start with the room, and the right pieces follow.
+			</p>
+		</div>
+		<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+			{#each rooms as r, i (r.slug)}
+				<a href="/rooms/{r.slug}" class="lift group overflow-hidden rounded-3xl bg-white shadow-md shadow-orange-900/5" use:reveal style="--rd: {i * 80}ms">
+					<div class="relative aspect-[4/3] overflow-hidden">
+						<img src={r.photo} alt={r.name} loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+						<span class="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-ink/60 to-transparent" aria-hidden="true"></span>
+						<span class="absolute bottom-3 left-4 font-display text-lg font-semibold text-white">{r.name}</span>
+					</div>
+					<p class="px-4 py-3 text-xs leading-relaxed text-muted">{r.blurb}</p>
+				</a>
+			{/each}
+		</div>
+		<div class="mt-8 text-center" use:reveal>
+			<a href="/rooms" class="group inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-flame px-6 py-3 text-sm font-bold text-flame transition hover:bg-flame hover:text-white">
+				All rooms <Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+			</a>
 		</div>
 	</div>
 </section>
@@ -306,10 +420,10 @@
 					</div>
 				</div>
 				<a
-					href="#collections"
+					href="/about"
 					class="mt-8 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white shadow-lg shadow-orange-500/30 transition hover:bg-flame-dark"
 				>
-					Explore more <Icon name="arrow-right" class="size-4" />
+					Our story <Icon name="arrow-right" class="size-4" />
 				</a>
 			</div>
 			<div class="relative" use:reveal>
@@ -333,11 +447,75 @@
 				Browse the new collection today — 10% off your first order, free delivery over $499.
 			</p>
 			<a
-				href="#collections"
+				href="/shop"
 				class="mt-7 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-flame-dark shadow transition hover:bg-peach"
 			>
 				Shop the collection <Icon name="arrow-right" class="size-4" />
 			</a>
+		</div>
+	</div>
+</section>
+
+<!-- ============ TESTIMONIALS ============ -->
+<section class="bg-peach/60 py-14 lg:py-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="text-center" use:reveal>
+			<h2 class="font-display text-3xl font-semibold text-ink sm:text-4xl">
+				What our <span class="text-flame">homes say</span>
+			</h2>
+			<p class="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+				1.3M+ reviews, 4.8 out of 5 on average — from real living rooms.
+			</p>
+		</div>
+		<div class="mt-10 grid gap-5 md:grid-cols-3">
+			{#each testimonials as t, i (t.name)}
+				<figure class="lift rounded-3xl bg-white p-6 shadow-sm" use:reveal style="--rd: {i * 80}ms">
+					<div class="flex items-center gap-1 text-gold" aria-label="5 out of 5 stars">
+						<Icon name="star" class="size-4" /><Icon name="star" class="size-4" /><Icon name="star" class="size-4" /><Icon name="star" class="size-4" /><Icon name="star" class="size-4" />
+					</div>
+					<blockquote class="mt-4 text-sm leading-relaxed text-cocoa">“{t.quote}”</blockquote>
+					<figcaption class="mt-5 border-t border-orange-100 pt-4">
+						<p class="text-sm font-bold text-ink">{t.name}</p>
+						<p class="mt-0.5 text-xs text-muted">{t.detail}</p>
+					</figcaption>
+				</figure>
+			{/each}
+		</div>
+	</div>
+</section>
+
+<!-- ============ JOURNAL ============ -->
+<section class="py-14 lg:py-20">
+	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="flex flex-wrap items-end justify-between gap-4" use:reveal>
+			<div>
+				<h2 class="font-display text-3xl font-semibold text-ink sm:text-4xl">
+					From the <span class="text-flame">journal</span>
+				</h2>
+				<p class="mt-3 max-w-lg text-sm leading-relaxed text-muted sm:text-base">
+					Guides for choosing, styling and caring for furniture that lasts.
+				</p>
+			</div>
+			<a href="/blog" class="group inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-flame px-6 py-3 text-sm font-bold text-flame transition hover:bg-flame hover:text-white">
+				Read the journal <Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+			</a>
+		</div>
+		<div class="mt-10 grid gap-5 md:grid-cols-3">
+			{#each journal as j, i (j.slug)}
+				<a href="/blog/{j.slug}" class="lift group overflow-hidden rounded-3xl bg-white shadow-md shadow-orange-900/5" use:reveal style="--rd: {i * 80}ms">
+					<div class="aspect-[16/10] overflow-hidden">
+						<img src={j.cover} alt={j.title} loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+					</div>
+					<div class="p-5">
+						<p class="text-xs font-semibold text-muted">{j.date} · {j.readTime}</p>
+						<h3 class="mt-2 font-display text-lg leading-snug font-semibold text-ink group-hover:text-flame">{j.title}</h3>
+						<p class="mt-2 text-sm leading-relaxed text-muted">{j.excerpt}</p>
+						<span class="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-flame">
+							Read more <Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
+						</span>
+					</div>
+				</a>
+			{/each}
 		</div>
 	</div>
 </section>
