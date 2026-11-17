@@ -217,6 +217,11 @@ class ShopState {
 	}
 
 	trackView(id: string) {
+		// Idempotent: if this product is already the most recent, do nothing.
+		// Without this guard, an $effect that calls trackView would read and
+		// write recentIds on every run and loop forever (Svelte throws
+		// effect_update_depth_exceeded).
+		if (this.recentIds[0] === id) return;
 		this.recentIds = [id, ...this.recentIds.filter((x) => x !== id)].slice(0, 8);
 		write('furniture_recent', this.recentIds);
 	}

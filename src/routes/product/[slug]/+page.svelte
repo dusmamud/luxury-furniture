@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { untrack } from 'svelte';
 	import Icon from '#lib/components/Icon.svelte';
 	import CutoutPicture from '#lib/components/CutoutPicture.svelte';
 	import ProductCard from '#lib/components/ProductCard.svelte';
@@ -19,8 +20,11 @@
 	let deselectedFbt = $state<Set<string>>(new Set());
 
 	// Reset the per-product state whenever the product changes (route reuse).
+	// trackView runs untracked: it reads shop.recentIds and writes it back,
+	// so tracking that read would make this effect re-trigger itself forever.
 	$effect(() => {
-		shop.trackView(product.id);
+		const id = product.id;
+		untrack(() => shop.trackView(id));
 		optionIdx = 0;
 		qty = 1;
 		deselectedFbt = new Set();
