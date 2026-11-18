@@ -106,7 +106,7 @@
 								class="grid size-24 shrink-0 place-items-center rounded-2xl bg-cream sm:size-28"
 								aria-label={product.name}
 							>
-								<CutoutPicture stem={product.cutout} alt={product.alt} cls="max-h-24 w-auto sm:max-h-28" />
+								<CutoutPicture stem={product.cutout} alt={product.alt} cls="max-h-24 w-auto sm:max-h-28" sizes="112px" />
 							</a>
 							<div class="min-w-0 flex-1">
 								<div class="flex items-start justify-between gap-3">

@@ -37,7 +37,7 @@
 				>
 					<span class="relative block bg-cream px-6 pt-6 pb-2">
 						<span class="cutout-zoom mx-auto block aspect-square max-w-[220px]">
-							<CutoutPicture stem={c.cutout} alt={c.name} />
+							<CutoutPicture stem={c.cutout} alt={c.name} sizes="220px" />
 						</span>
 					</span>
 					<span class="flex flex-1 flex-col px-5 pt-3 pb-5">

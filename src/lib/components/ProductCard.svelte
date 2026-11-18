@@ -19,7 +19,7 @@
 			<span class="absolute top-3 right-3 z-10 rounded-full bg-ink px-3 py-1 text-[11px] font-bold text-white">Save {formatPrice(product.compareAt - product.price)}</span>
 		{/if}
 		<div class="cutout-zoom mx-auto aspect-square max-w-[260px]">
-			<CutoutPicture stem={product.cutout} alt={product.alt} eager={false} />
+			<CutoutPicture stem={product.cutout} alt={product.alt} eager={false} sizes="(max-width: 640px) 50vw, 260px" />
 		</div>
 	</a>
 	<button

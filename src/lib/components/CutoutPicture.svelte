@@ -1,7 +1,7 @@
 <!-- Transparent product cutout with a modern-format fallback chain:
 	 AVIF (alpha, ~50% smaller than JPEG) -> WebP (alpha, ~3x smaller than PNG)
 	 -> PNG master. A failed source falls through to the next one.
-	 Each format serves a right-sized 400w variant first (400w files live next
+	 Each format serves right-sized variants first (400w + 600w files live next
 	 to the full-size ones) so phones do not download the 1000px master for a
 	 260px card. width/height reserve the aspect ratio and prevent layout shift. -->
 <script lang="ts">
@@ -29,12 +29,18 @@
 	}: { stem: string; alt: string; cls?: string; eager?: boolean; sizes?: string } = $props();
 
 	const dims = $derived(cutoutDims[stem]);
-	// The 400w variant exists only when the master is wider than 400px.
+	// The 400w variant exists when the master is wider than 400px, the 600w
+	// variant when it is wider than 600px.
 	const hasSmall = $derived(Boolean(dims && dims.w > 400));
-	const srcsetFor = (ext: string) =>
-		hasSmall && dims
-			? `/images/cutouts/${stem}-400.${ext} 400w, /images/cutouts/${stem}.${ext} ${dims.w}w`
-			: `/images/cutouts/${stem}.${ext} ${dims?.w ?? 800}w`;
+	const hasMedium = $derived(Boolean(dims && dims.w > 600));
+	const srcsetFor = (ext: string) => {
+		if (!dims) return `/images/cutouts/${stem}.${ext} 800w`;
+		const parts: string[] = [];
+		if (hasSmall) parts.push(`/images/cutouts/${stem}-400.${ext} 400w`);
+		if (hasMedium) parts.push(`/images/cutouts/${stem}-600.${ext} 600w`);
+		parts.push(`/images/cutouts/${stem}.${ext} ${dims.w}w`);
+		return parts.join(', ');
+	};
 	const avifSrcset = $derived(srcsetFor('avif'));
 	const webpSrcset = $derived(srcsetFor('webp'));
 </script>

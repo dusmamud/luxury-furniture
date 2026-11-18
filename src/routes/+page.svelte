@@ -83,6 +83,10 @@
 
 <!-- ============ HERO — same-to-same as the reference ============ -->
 <svelte:head>
+	<meta
+		name="description"
+		content="Handcrafted sofas, outdoor lounge chairs, modern couches and lighting. 1.3M+ happy customers, 4.7M+ members, 3-day delivery. Make you feel luxury."
+	/>
 	<link
 		rel="preload"
 		as="image"
@@ -220,7 +224,7 @@
 <!-- ============ BESTSELLERS ============ -->
 <section class="py-14 lg:py-20">
 	<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="flex flex-wrap items-end justify-between gap-4" use:reveal>
+		<div class="flex flex-wrap items-end justify-between gap-4">
 			<div>
 				<h2 class="font-display text-3xl font-semibold text-ink sm:text-4xl">
 					Bestsellers <span class="text-flame-deep">loved at home</span>
@@ -282,6 +286,7 @@
 								stem={c.cutout}
 								alt={c.alt}
 								cls="cutout-zoom mx-auto h-60 w-full object-contain drop-shadow-[0_18px_22px_rgba(43,26,18,0.35)] sm:h-72"
+								sizes="(max-width: 768px) 90vw, 560px"
 							/>
 						</div>
 						<div class="p-6 pt-4 sm:p-7 sm:pt-4">
@@ -307,11 +312,13 @@
 							stem={c.cutout}
 							alt={c.alt}
 							cls="cutout-zoom max-h-64 w-full object-contain drop-shadow-[0_18px_22px_rgba(43,26,18,0.35)] sm:max-h-[320px]"
+							sizes="(max-width: 768px) 90vw, 640px"
 						/>
 						<CutoutPicture
 							stem="plant"
 							alt=""
 							cls="pointer-events-none absolute -right-1 bottom-0 hidden h-40 w-auto object-contain drop-shadow-[0_12px_16px_rgba(43,26,18,0.3)] sm:block lg:h-52"
+							sizes="208px"
 						/>
 					</div>
 				</article>
@@ -329,6 +336,7 @@
 								stem={c.cutout}
 								alt={c.alt}
 								cls="cutout-zoom mx-auto h-44 w-full object-contain drop-shadow-[0_16px_18px_rgba(43,26,18,0.25)]"
+								sizes="(max-width: 640px) 90vw, 360px"
 							/>
 						</div>
 						<div class="bg-flame-dark p-5 text-center text-white">

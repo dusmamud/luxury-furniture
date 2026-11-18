@@ -468,21 +468,21 @@ export function monthlyPrice(n: number): string {
 
 // --- Responsive photo metadata -------------------------------------------
 // The big room photos are 1920px wide but shown at 256–600px. Right-sized
-// variants (-800 / -1200 WebP, same folder) keep the original as the 2x
+// variants (-400 / -800 / -1200 WebP, same folder) keep the original as the 2x
 // fallback. Small photos (modern-chair.jpg, hanging-light.jpg, bamboo-swing)
 // are already small enough and have no variants.
 export type PhotoMeta = { w: number; h: number; variants: number[] };
 
 export const photoMeta: Record<string, PhotoMeta> = {
-	'/images/modern-couch.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/outdoor-lounge.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/hero-sofa.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/about-room.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/bed.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/dining-table.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/floor-lamp.webp': { w: 1920, h: 1280, variants: [800, 1200] },
-	'/images/bookshelf.webp': { w: 1280, h: 1920, variants: [800, 1200] },
-	'/images/indoor-plants.webp': { w: 900, h: 2098, variants: [800] },
+	'/images/modern-couch.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/outdoor-lounge.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/hero-sofa.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/about-room.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/bed.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/dining-table.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/floor-lamp.webp': { w: 1920, h: 1280, variants: [400, 800, 1200] },
+	'/images/bookshelf.webp': { w: 1280, h: 1920, variants: [400, 800, 1200] },
+	'/images/indoor-plants.webp': { w: 900, h: 2098, variants: [400, 800] },
 	// Small photos: no variants needed, but dims are recorded so <img> tags
 	// can carry width/height.
 	'/images/modern-chair.jpg': { w: 800, h: 800, variants: [] },

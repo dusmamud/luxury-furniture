@@ -388,7 +388,7 @@
 						{#if product}
 							<li class="flex items-center gap-3">
 								<span class="grid size-14 shrink-0 place-items-center rounded-xl bg-cream">
-									<CutoutPicture stem={product.cutout} alt="" cls="max-h-12 w-auto" />
+									<CutoutPicture stem={product.cutout} alt="" cls="max-h-12 w-auto" sizes="56px" />
 								</span>
 								<span class="min-w-0 flex-1">
 									<span class="block truncate text-sm font-semibold text-ink">{product.name}</span>

@@ -193,7 +193,7 @@
 
 		<div class="mt-8 grid gap-10 lg:grid-cols-2 lg:gap-14">
 			<!-- Gallery -->
-			<div class="reveal" use:reveal>
+			<div>
 				<div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-peach-2 via-peach to-sand px-6 pt-8 pb-4">
 					{#if product.badge}
 						<span class="absolute top-4 left-4 z-10 rounded-full bg-flame-dark px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
@@ -457,7 +457,7 @@
 							aria-label={`Add ${p.name} to the bundle`}
 						/>
 						<span class="block size-20 shrink-0 overflow-hidden rounded-2xl bg-cream">
-							<CutoutPicture stem={p.cutout} alt={p.alt} />
+							<CutoutPicture stem={p.cutout} alt={p.alt} sizes="80px" />
 						</span>
 						<span class="min-w-0">
 							<span class="block truncate font-display text-base font-semibold text-ink">{p.name}</span>

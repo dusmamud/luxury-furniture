@@ -95,28 +95,49 @@
 			returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
 			merchantReturnDays: 30,
 			returnFees: 'https://schema.org/FreeReturn',
-			returnPolicyUrl: `${siteUrl}/returns-policy`
+			merchantReturnLink: `${siteUrl}/returns-policy`
 		},
 		hasShippingService: [
 			{
 				'@type': 'ShippingService',
 				name: 'Standard delivery',
-				shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
-				shippingRate: { '@type': 'MonetaryAmount', value: '49', currency: 'USD' },
-				deliveryTime: {
-					'@type': 'ShippingDeliveryTime',
-					transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 5, unitCode: 'DAY' }
-				}
+				shippingConditions: [
+					{
+						'@type': 'ShippingConditions',
+						shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+						orderValue: { '@type': 'MonetaryAmount', minValue: 0, maxValue: 499, currency: 'USD' },
+						shippingRate: { '@type': 'MonetaryAmount', value: '49', currency: 'USD' },
+						transitTime: {
+							'@type': 'ServicePeriod',
+							duration: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 5, unitCode: 'DAY' }
+						}
+					},
+					{
+						'@type': 'ShippingConditions',
+						shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+						orderValue: { '@type': 'MonetaryAmount', minValue: 499, currency: 'USD' },
+						shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'USD' },
+						transitTime: {
+							'@type': 'ServicePeriod',
+							duration: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 5, unitCode: 'DAY' }
+						}
+					}
+				]
 			},
 			{
 				'@type': 'ShippingService',
 				name: 'White-glove delivery',
-				shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
-				shippingRate: { '@type': 'MonetaryAmount', value: '99', currency: 'USD' },
-				deliveryTime: {
-					'@type': 'ShippingDeliveryTime',
-					transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 7, unitCode: 'DAY' }
-				}
+				shippingConditions: [
+					{
+						'@type': 'ShippingConditions',
+						shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+						shippingRate: { '@type': 'MonetaryAmount', value: '99', currency: 'USD' },
+						transitTime: {
+							'@type': 'ServicePeriod',
+							duration: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 7, unitCode: 'DAY' }
+						}
+					}
+				]
 			}
 		]
 	};

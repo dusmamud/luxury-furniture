@@ -150,7 +150,7 @@
 			</div>
 			<div class="reveal relative overflow-hidden rounded-[2rem] bg-peach px-8 pt-10 pb-0" use:reveal style="--rd: 120ms">
 				<div class="cutout-zoom mx-auto max-w-sm">
-					<CutoutPicture stem="modern-sofa" alt="Modern three-seater sofa, hand-finished in solid oak and performance fabric" eager={true} />
+					<CutoutPicture stem="modern-sofa" alt="Modern three-seater sofa, hand-finished in solid oak and performance fabric" eager={true} sizes="(max-width: 1024px) 90vw, 384px" />
 				</div>
 				<p class="pb-6 text-center text-sm font-semibold text-muted">
 					The Modern Couch — our best-loved three-seater since 2019
