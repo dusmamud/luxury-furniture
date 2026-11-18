@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Categories — Furniture | Sofas, Chairs, Tables, Lighting &amp; More</title>
+	<title>Categories — Furniture | Sofas, Chairs &amp; Tables</title>
 	<meta
 		name="description"
 		content="Browse furniture by category: sofas and couches, chairs, tables, lighting, storage, bedroom, outdoor and decor. Free shipping over $499."
@@ -16,7 +16,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame uppercase">Categories</p>
+			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Categories</p>
 			<h1 class="mt-3 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl">
 				Find your piece
 			</h1>
@@ -41,11 +41,11 @@
 						</span>
 					</span>
 					<span class="flex flex-1 flex-col px-5 pt-3 pb-5">
-						<span class="font-display text-xl leading-snug font-semibold text-ink group-hover:text-flame">
+						<span class="font-display text-xl leading-snug font-semibold text-ink group-hover:text-flame-deep">
 							{c.name}
 						</span>
 						<span class="mt-1 line-clamp-2 text-sm leading-relaxed text-muted">{c.blurb}</span>
-						<span class="mt-auto flex items-center justify-between pt-4 text-sm font-bold text-flame">
+						<span class="mt-auto flex items-center justify-between pt-4 text-sm font-bold text-flame-deep">
 							{count} {count === 1 ? 'piece' : 'pieces'}
 							<span class="inline-flex items-center gap-1">
 								Shop now

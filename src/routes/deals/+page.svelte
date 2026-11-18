@@ -25,7 +25,7 @@
 </script>
 
 <svelte:head>
-	<title>Deals — Furniture | Save up to {formatPrice(biggestSaving)} on sofas, tables &amp; lighting</title>
+	<title>Deals — Furniture | Save up to {formatPrice(biggestSaving)} on sofas &amp; tables</title>
 	<meta
 		name="description"
 		content="Furniture deals: save on the Modern Couch, Haven Oak Dining Table and more. Extra 10% off your first order with code WELCOME10, plus 0% APR financing."
@@ -35,9 +35,9 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame uppercase">Deals</p>
+			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Deals</p>
 			<h1 class="mt-3 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl">
-				Deals worth <span class="text-flame">sitting on</span>
+				Deals worth <span class="text-flame-deep">sitting on</span>
 			</h1>
 			<p class="mt-4 max-w-xl text-base leading-relaxed text-muted sm:text-lg">
 				Real savings on the pieces people love most — up to {formatPrice(biggestSaving)} off, while stock
@@ -52,7 +52,7 @@
 			style="--rd: 80ms"
 		>
 			<div class="flex items-start gap-4">
-				<span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-flame text-white">
+				<span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-flame-dark text-white">
 					<Icon name="sparkle" class="size-6" />
 				</span>
 				<div>
@@ -93,7 +93,7 @@
 		<div class="reveal mb-14 rounded-[2rem] border border-orange-100 bg-white p-6 sm:p-8 lg:mb-20" use:reveal>
 			<div class="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
 				<div class="flex items-start gap-4">
-					<span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-peach text-flame">
+					<span class="grid size-12 shrink-0 place-items-center rounded-2xl bg-peach text-flame-deep">
 						<Icon name="shield" class="size-6" />
 					</span>
 					<div>
@@ -107,7 +107,7 @@
 				</div>
 				<a
 					href="/shop"
-					class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="inline-flex min-h-12 shrink-0 items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Shop all furniture <Icon name="arrow-right" class="size-4" />
 				</a>

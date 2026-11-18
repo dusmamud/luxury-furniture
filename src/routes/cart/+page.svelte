@@ -33,7 +33,7 @@
 
 <div class="mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
 	<div use:reveal class="reveal">
-		<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Furniture</p>
+		<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Furniture</p>
 		<h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Your bag</h1>
 		<p class="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
 			{#if shop.cartCount > 0}
@@ -47,7 +47,7 @@
 
 	{#if shop.cart.length === 0}
 		<div use:reveal class="reveal mt-10 rounded-3xl border border-orange-100 bg-white px-6 py-14 text-center">
-			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame">
+			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame-deep">
 				<Icon name="bag" class="size-7" />
 			</span>
 			<h2 class="mt-5 font-display text-2xl font-semibold text-ink">Your bag is empty</h2>
@@ -57,7 +57,7 @@
 			</p>
 			<a
 				href="/shop"
-				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 			>
 				Browse the collection <Icon name="arrow-right" class="size-4" />
 			</a>
@@ -70,12 +70,12 @@
 				<div use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-5">
 					{#if remaining > 0}
 						<p class="flex items-center gap-2 text-sm font-semibold text-ink">
-							<Icon name="truck" class="size-5 shrink-0 text-flame" />
+							<Icon name="truck" class="size-5 shrink-0 text-flame-deep" />
 							Add {formatPrice(remaining)} more for free standard shipping
 						</p>
 					{:else}
 						<p class="flex items-center gap-2 text-sm font-semibold text-ink">
-							<Icon name="check" class="size-5 shrink-0 text-flame" />
+							<Icon name="check" class="size-5 shrink-0 text-flame-deep" />
 							You have unlocked free standard shipping
 						</p>
 					{/if}
@@ -87,7 +87,7 @@
 						aria-valuemax={100}
 						aria-label="Progress toward free shipping"
 					>
-						<div class="h-full rounded-full bg-flame transition-all duration-500" style="width: {progress}%"></div>
+						<div class="h-full rounded-full bg-flame-dark transition-all duration-500" style="width: {progress}%"></div>
 					</div>
 					<p class="mt-2 text-xs text-muted">
 						Free standard shipping on orders over {formatPrice(FREE_SHIPPING_OVER)}.
@@ -112,7 +112,7 @@
 								<div class="flex items-start justify-between gap-3">
 									<div class="min-w-0">
 										<h2 class="font-display text-base leading-snug font-semibold text-ink sm:text-lg">
-											<a href="/product/{product.slug}" class="hover:text-flame">{product.name}</a>
+											<a href="/product/{product.slug}" class="hover:text-flame-deep">{product.name}</a>
 										</h2>
 										{#if item.variant}
 											<p class="mt-0.5 text-xs text-muted">{product.optionLabel}: {item.variant}</p>
@@ -121,7 +121,7 @@
 									</div>
 									<button
 										type="button"
-										class="grid size-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-peach hover:text-flame"
+										class="grid size-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-peach hover:text-flame-deep"
 										aria-label="Remove {product.name} from bag"
 										onclick={() => shop.removeFromCart(item.id, item.variant)}
 									>
@@ -132,7 +132,7 @@
 									<div class="flex items-center rounded-full border border-orange-200">
 										<button
 											type="button"
-											class="grid size-11 place-items-center rounded-full text-ink transition hover:text-flame disabled:opacity-40"
+											class="grid size-11 place-items-center rounded-full text-ink transition hover:text-flame-deep disabled:opacity-40"
 											aria-label="Decrease quantity of {product.name}"
 											disabled={item.qty <= 1}
 											onclick={() => shop.updateQty(item.id, item.qty - 1, item.variant)}
@@ -145,7 +145,7 @@
 										>
 										<button
 											type="button"
-											class="grid size-11 place-items-center rounded-full text-ink transition hover:text-flame disabled:opacity-40"
+											class="grid size-11 place-items-center rounded-full text-ink transition hover:text-flame-deep disabled:opacity-40"
 											aria-label="Increase quantity of {product.name}"
 											disabled={item.qty >= product.stock}
 											onclick={() => shop.updateQty(item.id, item.qty + 1, item.variant)}
@@ -164,7 +164,7 @@
 
 				<a
 					href="/shop"
-					class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+					class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 				>
 					<Icon name="arrow-right" class="size-4 rotate-180" /> Continue shopping
 				</a>
@@ -178,12 +178,12 @@
 				{#if shop.promoCode}
 					<div class="mt-5 flex items-center justify-between gap-3 rounded-2xl bg-peach px-4 py-3">
 						<p class="flex items-center gap-2 text-sm font-bold text-ink">
-							<Icon name="check" class="size-4 shrink-0 text-flame" />
+							<Icon name="check" class="size-4 shrink-0 text-flame-deep" />
 							{shop.promoCode} applied
 						</p>
 						<button
 							type="button"
-							class="flex min-h-11 items-center gap-1 rounded-full px-2 text-sm font-semibold text-flame hover:underline"
+							class="flex min-h-11 items-center gap-1 rounded-full px-2 text-sm font-semibold text-flame-deep hover:underline"
 							onclick={() => shop.clearPromo()}
 						>
 							Remove
@@ -217,7 +217,7 @@
 							</button>
 						</div>
 						{#if promoError}
-							<p id="promo-error" class="mt-1.5 text-sm font-medium text-flame" role="alert">{promoError}</p>
+							<p id="promo-error" class="mt-1.5 text-sm font-medium text-flame-deep" role="alert">{promoError}</p>
 						{:else}
 							<p class="mt-1.5 text-xs text-muted">Try WELCOME10 for 10% off or FREESHIP for free shipping.</p>
 						{/if}
@@ -232,7 +232,7 @@
 					{#if shop.cartDiscount > 0}
 						<div class="flex justify-between">
 							<dt class="text-muted">Discount ({shop.promoCode})</dt>
-							<dd class="font-semibold text-flame">−{formatPrice(shop.cartDiscount)}</dd>
+							<dd class="font-semibold text-flame-deep">−{formatPrice(shop.cartDiscount)}</dd>
 						</div>
 					{/if}
 					<div class="flex justify-between">
@@ -249,7 +249,7 @@
 
 				<a
 					href="/checkout"
-					class="mt-6 flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-6 flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Checkout <Icon name="arrow-right" class="size-4" />
 				</a>

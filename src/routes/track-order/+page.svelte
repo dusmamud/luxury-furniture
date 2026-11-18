@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { page } from '$app/state';
 	import Icon from '#lib/components/Icon.svelte';
+	import CutoutPicture from '#lib/components/CutoutPicture.svelte';
 	import { reveal } from '#lib/actions/reveal';
-	import { formatPrice } from '#lib/data/products';
+	import { formatPrice, getProduct } from '#lib/data/products';
 	import { formatDate, ORDER_STEPS, shop } from '#lib/data/store.svelte';
 
 	let query = $state('');
@@ -32,7 +33,7 @@
 
 <div class="mx-auto max-w-3xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
 	<div use:reveal class="reveal">
-		<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Furniture</p>
+		<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Furniture</p>
 		<h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Track your order</h1>
 		<p class="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
 			Enter your order number to see where your furniture is on its way to you.
@@ -60,17 +61,17 @@
 			/>
 			<button
 				type="submit"
-				class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 			>
 				<Icon name="search" class="size-4" /> Track
 			</button>
 		</div>
 		<p class="mt-2 text-xs text-muted">
 			Demo order numbers look like FU-XXXXXX. You will find yours on the confirmation page after checkout, or
-			in <a href="/orders" class="font-semibold text-flame hover:underline">Your orders</a>.
+			in <a href="/orders" class="font-semibold text-flame-deep hover:underline">Your orders</a>.
 		</p>
 		{#if lookupId && !order}
-			<p class="mt-3 flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-semibold text-flame" role="alert">
+			<p class="mt-3 flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-semibold text-flame-deep" role="alert">
 				<Icon name="close" class="size-4 shrink-0" />
 				No order with that number. Please check the number and try again.
 			</p>
@@ -82,7 +83,7 @@
 			<div class="flex flex-wrap items-start justify-between gap-3">
 				<div>
 					<h2 class="font-display text-xl font-semibold text-ink">
-						Order <span class="text-flame">{order.id}</span>
+						Order <span class="text-flame-deep">{order.id}</span>
 					</h2>
 					<p class="mt-0.5 text-sm text-muted">Placed {formatDate(order.placedAt)} · {order.delivery}</p>
 				</div>
@@ -91,14 +92,14 @@
 
 			{#if order.status === 'cancelled'}
 				<p
-					class="mt-5 flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-bold text-flame"
+					class="mt-5 flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-bold text-flame-deep"
 					role="status"
 				>
 					<Icon name="close" class="size-5 shrink-0" /> This order was cancelled.
 				</p>
 			{:else}
 				<p class="mt-5 flex items-center gap-2 text-sm font-semibold text-ink">
-					<Icon name="truck" class="size-5 text-flame" />
+					<Icon name="truck" class="size-5 text-flame-deep" />
 					Estimated delivery: {shop.estimatedDelivery(order)}
 				</p>
 
@@ -109,15 +110,15 @@
 						<li class="relative flex gap-4 pb-6 last:pb-0">
 							{#if i < ORDER_STEPS.length - 1}
 								<span
-									class="absolute top-8 left-[15px] h-[calc(100%-24px)] w-0.5 {state === 'todo' ? 'bg-orange-100' : 'bg-flame'}"
+									class="absolute top-8 left-[15px] h-[calc(100%-24px)] w-0.5 {state === 'todo' ? 'bg-orange-100' : 'bg-flame-dark'}"
 									aria-hidden="true"
 								></span>
 							{/if}
 							<span
 								class="relative z-10 grid size-8 shrink-0 place-items-center rounded-full text-sm font-bold {state === 'done'
-									? 'bg-flame text-white'
+									? 'bg-flame-dark text-white'
 									: state === 'current'
-										? 'bg-flame text-white ring-4 ring-peach'
+										? 'bg-flame-dark text-white ring-4 ring-peach'
 										: 'bg-peach text-muted'}"
 								aria-current={state === 'current' ? 'step' : undefined}
 							>
@@ -130,7 +131,7 @@
 							<span class="pt-1">
 								<span class="block text-sm font-bold {state === 'todo' ? 'text-muted' : 'text-ink'}">{label}</span>
 								{#if state === 'current'}
-									<span class="mt-0.5 block text-xs text-flame">In progress</span>
+									<span class="mt-0.5 block text-xs text-flame-deep">In progress</span>
 								{:else if state === 'done'}
 									<span class="mt-0.5 block text-xs text-muted">Completed</span>
 								{/if}
@@ -144,9 +145,14 @@
 			<h3 class="mt-6 border-t border-orange-100 pt-5 font-display text-lg font-semibold text-ink">Items</h3>
 			<ul class="mt-4 space-y-3">
 				{#each order.items as item (item.id + '|' + (item.variant ?? ''))}
+					{@const p = getProduct(item.id)}
 					<li class="flex items-center gap-3">
 						<span class="grid size-14 shrink-0 place-items-center rounded-xl bg-cream">
-							<img src={item.src} alt={item.name} class="max-h-12 w-auto" loading="lazy" decoding="async" />
+							{#if p}
+								<CutoutPicture stem={p.cutout} alt={item.name} cls="max-h-12 w-auto" sizes="56px" />
+							{:else}
+								<img src={item.src} alt={item.name} class="max-h-12 w-auto" loading="lazy" decoding="async" />
+							{/if}
 						</span>
 						<span class="min-w-0 flex-1">
 							<span class="block truncate text-sm font-semibold text-ink">{item.name}</span>

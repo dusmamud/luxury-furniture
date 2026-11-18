@@ -26,7 +26,7 @@
 </script>
 
 <svelte:head>
-	<title>Help Centre — Furniture | Delivery, returns, warranty &amp; tracking</title>
+	<title>Help Centre — Furniture | Delivery, returns &amp; warranty</title>
 	<meta
 		name="description"
 		content="The Furniture help centre — find answers on delivery, returns, warranty, shipping, financing, trade and tracking your order."
@@ -36,7 +36,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal mx-auto max-w-2xl text-center" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Help centre</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Help centre</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 				How can we help?
 			</h1>
@@ -61,7 +61,7 @@
 
 		{#if filtered.length === 0}
 			<div class="reveal mx-auto mt-12 max-w-xl rounded-3xl border border-orange-100 bg-white p-8 text-center" use:reveal>
-				<span class="mx-auto grid size-12 place-items-center rounded-full bg-peach text-flame">
+				<span class="mx-auto grid size-12 place-items-center rounded-full bg-peach text-flame-deep">
 					<Icon name="search" class="size-6" />
 				</span>
 				<h2 class="mt-4 font-display text-xl font-semibold text-ink">Nothing matches “{query}”</h2>
@@ -70,7 +70,7 @@
 				</p>
 				<a
 					href="/contact"
-					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Contact us <Icon name="arrow-right" class="size-4" />
 				</a>
@@ -84,12 +84,12 @@
 						use:reveal
 						style="--rd: {(i % 3) * 80}ms"
 					>
-						<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame transition group-hover:bg-flame group-hover:text-white">
+						<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame-deep transition group-hover:bg-flame-dark group-hover:text-white">
 							<Icon name={t.icon} class="size-6" />
 						</span>
-						<h2 class="mt-4 font-display text-lg font-semibold text-ink group-hover:text-flame">{t.title}</h2>
+						<h2 class="mt-4 font-display text-lg font-semibold text-ink group-hover:text-flame-deep">{t.title}</h2>
 						<p class="mt-2 text-sm leading-relaxed text-muted">{t.blurb}</p>
-						<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame">
+						<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep">
 							Learn more <Icon name="arrow-right" class="size-4 transition group-hover:translate-x-1" />
 						</span>
 					</a>
@@ -105,7 +105,7 @@
 				</p>
 				<a
 					href="/contact"
-					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Contact us <Icon name="arrow-right" class="size-4" />
 				</a>
@@ -118,7 +118,7 @@
 				</p>
 				<a
 					href="/faq"
-					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:text-flame"
+					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-ink transition hover:text-flame-deep"
 				>
 					Read all FAQs <Icon name="arrow-right" class="size-4" />
 				</a>

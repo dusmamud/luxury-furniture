@@ -1,4 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700;800&display=swap');
+/* Fonts are self-hosted (static/fonts/, WOFF2) — no Google Fonts request,
+   so there is no render-blocking font stylesheet and no @import chain.
+   Same family names as before, so no other CSS changes are needed. */
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/poppins-500.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/poppins-600.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/poppins-700.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/fonts/inter-400.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-display: swap;
+	src: url('/fonts/inter-500.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/fonts/inter-600.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/fonts/inter-700.woff2') format('woff2');
+}
+@font-face {
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 800;
+	font-display: swap;
+	src: url('/fonts/inter-800.woff2') format('woff2');
+}
 @import 'tailwindcss';
 
 @theme {
@@ -17,6 +75,7 @@
 	--color-cocoa: #4a3226;
 	--color-muted: #7a5a4a;
 	--color-gold: #c9a227;
+	--color-gold-deep: #8a6d1a;
 
 	--animate-float: float 6s ease-in-out infinite;
 }

@@ -27,7 +27,7 @@
 <div class="mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
 	<div use:reveal class="reveal flex flex-wrap items-end justify-between gap-4">
 		<div>
-			<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Furniture</p>
+			<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Furniture</p>
 			<h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Your wishlist</h1>
 			<p class="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
 				{#if wished.length > 0}
@@ -41,7 +41,7 @@
 		{#if wished.length > 0}
 			<button
 				type="button"
-				class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				onclick={addAll}
 			>
 				<Icon name="bag" class="size-4" /> Add all to bag
@@ -51,7 +51,7 @@
 
 	{#if wished.length === 0}
 		<div use:reveal class="reveal mt-10 rounded-3xl border border-orange-100 bg-white px-6 py-14 text-center">
-			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame">
+			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame-deep">
 				<Icon name="heart" class="size-7" />
 			</span>
 			<h2 class="mt-5 font-display text-2xl font-semibold text-ink">Nothing saved yet</h2>
@@ -60,7 +60,7 @@
 			</p>
 			<a
 				href="/shop"
-				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 			>
 				Browse the collection <Icon name="arrow-right" class="size-4" />
 			</a>

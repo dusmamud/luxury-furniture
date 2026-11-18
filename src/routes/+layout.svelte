@@ -12,6 +12,60 @@
 	const siteUrl = 'https://luxury-furniture.pages.dev';
 	const canonical = $derived(`${siteUrl}${page.url.pathname}`);
 
+	// App-only pages are functional, not content: keep them out of search results
+	// (and out of sitemap.xml) with a robots noindex.
+	const appRoutes = ['/cart', '/checkout', '/login', '/signup', '/account', '/orders', '/track-order', '/wishlist'];
+	const noindex = $derived(appRoutes.includes(page.url.pathname));
+
+	// Open Graph / Twitter Card: derived from the page's own loaded data so
+	// every share shows that page's title, description and image instead of
+	// the generic home card. Pages without data fall back to the home card.
+	type PageMetaData = {
+		product?: { name: string; blurb: string; photo: string };
+		category?: { name: string; blurb: string };
+		items?: { photo: string }[];
+		room?: { name: string; blurb: string; photo: string };
+		article?: { title: string; excerpt: string; cover: string };
+	};
+	const og = $derived.by(() => {
+		const d = page.data as PageMetaData;
+		if (d.product)
+			return {
+				type: 'product',
+				title: `${d.product.name} — Furniture`,
+				description: d.product.blurb,
+				image: `${siteUrl}${d.product.photo}`
+			};
+		if (d.category)
+			return {
+				type: 'website',
+				title: `${d.category.name} — Furniture`,
+				description: d.category.blurb,
+				image: d.items?.[0]?.photo ? `${siteUrl}${d.items[0].photo}` : `${siteUrl}/images/hero-sofa.webp`
+			};
+		if (d.room)
+			return {
+				type: 'website',
+				title: `${d.room.name} — Furniture`,
+				description: d.room.blurb,
+				image: `${siteUrl}${d.room.photo}`
+			};
+		if (d.article)
+			return {
+				type: 'article',
+				title: `${d.article.title} — Furniture Journal`,
+				description: d.article.excerpt,
+				image: `${siteUrl}${d.article.cover}`
+			};
+		return {
+			type: 'website',
+			title: 'Furniture — Make You Feel Luxury',
+			description:
+				'Handcrafted sofas, outdoor lounge chairs, modern couches and lighting. 1.3M+ happy customers, 3-day delivery.',
+			image: `${siteUrl}/images/hero-sofa.webp`
+		};
+	});
+
 	const storeJsonLd = {
 		'@context': 'https://schema.org',
 		'@type': 'FurnitureStore',
@@ -29,26 +83,65 @@
 			postalCode: '70433',
 			addressCountry: 'US'
 		},
-		aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '13200' }
+		aggregateRating: { '@type': 'AggregateRating', ratingValue: '4.8', reviewCount: '13200' },
+		image: `${siteUrl}/images/hero-sofa.webp`,
+		// Site-wide policies (Google accepts one Organization-level block since
+		// 2024/2025 instead of repeating shipping/returns on every product).
+		// Values are the real ones from /returns-policy and /delivery:
+		// 30 days, free home collection, full refund within 5 business days.
+		hasMerchantReturnPolicy: {
+			'@type': 'MerchantReturnPolicy',
+			applicableCountry: 'US',
+			returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+			merchantReturnDays: 30,
+			returnFees: 'https://schema.org/FreeReturn',
+			returnPolicyUrl: `${siteUrl}/returns-policy`
+		},
+		hasShippingService: [
+			{
+				'@type': 'ShippingService',
+				name: 'Standard delivery',
+				shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+				shippingRate: { '@type': 'MonetaryAmount', value: '49', currency: 'USD' },
+				deliveryTime: {
+					'@type': 'ShippingDeliveryTime',
+					transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 5, unitCode: 'DAY' }
+				}
+			},
+			{
+				'@type': 'ShippingService',
+				name: 'White-glove delivery',
+				shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'US' },
+				shippingRate: { '@type': 'MonetaryAmount', value: '99', currency: 'USD' },
+				deliveryTime: {
+					'@type': 'ShippingDeliveryTime',
+					transitTime: { '@type': 'QuantitativeValue', minValue: 3, maxValue: 7, unitCode: 'DAY' }
+				}
+			}
+		]
 	};
 </script>
 
 <svelte:head>
 	<title>Furniture — Make You Feel Luxury | Sofas, Chairs &amp; Lighting</title>
-	<meta
-		name="description"
-		content="Handcrafted sofas, outdoor lounge chairs, modern couches and lighting. 1.3M+ happy customers, 4.7M+ members, 3-day delivery. Make you feel luxury."
-	/>
+	<!-- No meta description here on purpose: every page defines its own, and
+	     a second generic description would shadow it in search results. -->
+	{#if noindex}<meta name="robots" content="noindex" />{/if}
 	<link rel="canonical" href={canonical} />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="Furniture — Make You Feel Luxury" />
-	<meta
-		property="og:description"
-		content="Handcrafted sofas, outdoor lounge chairs, modern couches and lighting. 1.3M+ happy customers, 3-day delivery."
-	/>
+	<!-- Self-hosted fonts: preload the two above-the-fold weights so the
+	     first paint never waits on a font stylesheet. -->
+	<link rel="preload" href="/fonts/poppins-600.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+	<link rel="preload" href="/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+	<meta property="og:type" content={og.type} />
+	<meta property="og:title" content={og.title} />
+	<meta property="og:description" content={og.description} />
 	<meta property="og:url" content={canonical} />
-	<meta property="og:image" content={`${siteUrl}/images/hero-sofa.webp`} />
+	<meta property="og:image" content={og.image} />
+	<meta property="og:site_name" content="Furniture" />
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={og.title} />
+	<meta name="twitter:description" content={og.description} />
+	<meta name="twitter:image" content={og.image} />
 	{@html `<script type="application/ld+json">${JSON.stringify(storeJsonLd)}</script>`}
 </svelte:head>
 

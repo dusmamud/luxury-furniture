@@ -73,14 +73,14 @@
 	<title>Delivery — Furniture | Standard, white-glove &amp; store pickup</title>
 	<meta
 		name="description"
-		content="Delivery options at Furniture: standard $49 (free over $499, 3–5 days), white-glove +$99 with assembly and packaging removal, and free store pickup in Covington."
+		content="Delivery options at Furniture: standard $49 (free over $499, 3–5 days), white-glove +$99 with assembly, and free store pickup in Covington."
 	/>
 </svelte:head>
 
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Delivery</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Delivery</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 				From our workshop to your living room.
 			</h1>
@@ -100,11 +100,11 @@
 					style="--rd: {i * 100}ms"
 				>
 					{#if t.highlight}
-						<span class="absolute -top-3.5 left-6 rounded-full bg-flame px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
+						<span class="absolute -top-3.5 left-6 rounded-full bg-flame-dark px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
 							Most popular
 						</span>
 					{/if}
-					<span class="grid size-12 place-items-center rounded-2xl {t.highlight ? 'bg-flame text-white' : 'bg-peach text-flame'}">
+					<span class="grid size-12 place-items-center rounded-2xl {t.highlight ? 'bg-flame-dark text-white' : 'bg-peach text-flame-deep'}">
 						<Icon name={t.icon} class="size-6" />
 					</span>
 					<h2 class="mt-4 font-display text-2xl font-semibold {t.highlight ? 'text-white' : 'text-ink'}">{t.name}</h2>
@@ -112,13 +112,13 @@
 						{t.price}
 						<span class="text-sm font-medium {t.highlight ? 'text-white/70' : 'text-muted'}">{t.priceNote}</span>
 					</p>
-					<p class="mt-1 flex items-center gap-2 text-sm font-semibold {t.highlight ? 'text-white/80' : 'text-flame'}">
+					<p class="mt-1 flex items-center gap-2 text-sm font-semibold {t.highlight ? 'text-white/80' : 'text-flame-deep'}">
 						<Icon name="clock" class="size-4" /> {t.time}
 					</p>
 					<ul class="mt-6 space-y-3">
 						{#each t.features as f}
 							<li class="flex items-start gap-3 text-sm leading-relaxed {t.highlight ? 'text-white/85' : 'text-cocoa'}">
-								<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full {t.highlight ? 'bg-white/15 text-white' : 'bg-peach text-flame'}">
+								<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full {t.highlight ? 'bg-white/15 text-white' : 'bg-peach text-flame-deep'}">
 									<Icon name="check" class="size-3.5" />
 								</span>
 								{f}
@@ -128,8 +128,8 @@
 					<a
 						href={t.href}
 						class="mt-8 inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition {t.highlight
-							? 'bg-flame text-white hover:bg-flame-dark'
-							: 'bg-ink text-white hover:bg-flame'}"
+							? 'bg-flame-dark text-white hover:bg-flame-deep'
+							: 'bg-ink text-white hover:bg-flame-dark'}"
 					>
 						{t.cta} <Icon name="arrow-right" class="size-4" />
 					</a>
@@ -140,7 +140,7 @@
 		<!-- Packaging + tracking -->
 		<div class="mt-12 grid gap-5 md:grid-cols-2">
 			<div class="reveal rounded-3xl border border-orange-100 bg-white p-7" use:reveal>
-				<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame">
+				<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame-deep">
 					<Icon name="leaf" class="size-6" />
 				</span>
 				<h2 class="mt-4 font-display text-xl font-semibold text-ink">Packed to protect, made to recycle</h2>
@@ -150,7 +150,7 @@
 				</p>
 			</div>
 			<div class="reveal rounded-3xl border border-orange-100 bg-white p-7" use:reveal style="--rd: 100ms">
-				<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame">
+				<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame-deep">
 					<Icon name="search" class="size-6" />
 				</span>
 				<h2 class="mt-4 font-display text-xl font-semibold text-ink">Track it door to door</h2>
@@ -158,7 +158,7 @@
 					Every order gets tracking the moment it leaves our Covington workshop, with text and email
 					updates at each step. Lost your link? Your order number is enough.
 				</p>
-				<a href="/track-order" class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame hover:text-flame-dark">
+				<a href="/track-order" class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep hover:text-flame-deep">
 					Track my order <Icon name="arrow-right" class="size-4" />
 				</a>
 			</div>
@@ -167,7 +167,7 @@
 		<!-- Delivery FAQ -->
 		<div class="mt-16">
 			<div class="reveal max-w-2xl" use:reveal>
-				<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Delivery FAQ</p>
+				<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Delivery FAQ</p>
 				<h2 class="mt-3 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">
 					Before delivery day.
 				</h2>
@@ -181,9 +181,9 @@
 				{/each}
 			</div>
 			<p class="reveal mt-8 text-sm leading-relaxed text-muted" use:reveal>
-				More questions? See the full <a href="/faq" class="font-semibold text-flame underline underline-offset-2">FAQ</a>,
-				our <a href="/shipping-policy" class="font-semibold text-flame underline underline-offset-2">shipping policy</a>,
-				or call us on <a href="tel:+19855550148" class="font-semibold text-flame underline underline-offset-2">(985) 555-0148</a>.
+				More questions? See the full <a href="/faq" class="font-semibold text-flame-deep underline underline-offset-2">FAQ</a>,
+				our <a href="/shipping-policy" class="font-semibold text-flame-deep underline underline-offset-2">shipping policy</a>,
+				or call us on <a href="tel:+19855550148" class="font-semibold text-flame-deep underline underline-offset-2">(985) 555-0148</a>.
 			</p>
 		</div>
 	</div>

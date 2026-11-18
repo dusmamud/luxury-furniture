@@ -2,14 +2,33 @@
 	import Icon from '#lib/components/Icon.svelte';
 	import ProductCard from '#lib/components/ProductCard.svelte';
 	import { reveal } from '#lib/actions/reveal';
+	import { photoDims, photoSrcset } from '#lib/data/products';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+
+	let heroSrcset = $derived(photoSrcset(data.room.photo));
+	let heroDims = $derived(photoDims(data.room.photo));
 </script>
 
 <svelte:head>
 	<title>{data.room.name} furniture — Furniture</title>
-	<meta name="description" content="{data.room.name}: {data.room.blurb}" />
+	<meta
+		name="description"
+		content="{data.room.name} furniture at Furniture — {data.room.blurb} Free shipping over $499, 30-day returns."
+	/>
+	{#if heroSrcset}
+		<link rel="preload" as="image" imagesrcset={heroSrcset} imagesizes="100vw" fetchpriority="high" />
+	{/if}
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Shop', item: 'https://luxury-furniture.pages.dev/shop' },
+			{ '@type': 'ListItem', position: 2, name: 'Rooms', item: 'https://luxury-furniture.pages.dev/rooms' },
+			{ '@type': 'ListItem', position: 3, name: data.room.name, item: `https://luxury-furniture.pages.dev/rooms/${data.room.slug}` }
+		]
+	})}</script>`}
 </svelte:head>
 
 <!-- Room hero -->
@@ -18,7 +37,12 @@
 		src={data.room.photo}
 		alt={data.room.name}
 		class="absolute inset-0 h-full w-full object-cover"
+		srcset={heroSrcset}
+		sizes="100vw"
+		width={heroDims?.width}
+		height={heroDims?.height}
 		loading="eager"
+		fetchpriority="high"
 		decoding="async"
 	/>
 	<div class="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/50 to-ink/10" aria-hidden="true"></div>
@@ -52,7 +76,7 @@
 			</div>
 		{:else}
 			<div class="reveal mx-auto max-w-md rounded-3xl bg-white p-8 text-center shadow-sm" use:reveal>
-				<div class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame">
+				<div class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame-deep">
 					<Icon name="sofa" class="size-6" />
 				</div>
 				<h2 class="mt-4 font-display text-2xl font-semibold text-ink">Nothing here yet</h2>
@@ -61,7 +85,7 @@
 				</p>
 				<a
 					href="/shop"
-					class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Shop all furniture
 				</a>
@@ -70,7 +94,7 @@
 		<div class="reveal mt-12 text-center" use:reveal>
 			<a
 				href="/rooms"
-				class="inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-flame px-6 py-3 text-sm font-bold text-flame transition hover:bg-flame hover:text-white"
+				class="inline-flex min-h-11 items-center gap-2 rounded-full border-2 border-flame px-6 py-3 text-sm font-bold text-flame-deep transition hover:bg-flame-dark hover:text-white"
 			>
 				Browse all rooms <Icon name="arrow-right" class="size-4" />
 			</a>

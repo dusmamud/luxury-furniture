@@ -76,7 +76,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Sitemap</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Sitemap</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 				Every page, in one place.
 			</h1>
@@ -95,9 +95,9 @@
 							<li>
 								<a
 									href={l.href}
-									class="group inline-flex min-h-11 items-center gap-2 rounded-lg py-1.5 text-sm font-medium text-muted transition hover:text-flame"
+									class="group inline-flex min-h-11 items-center gap-2 rounded-lg py-1.5 text-sm font-medium text-muted transition hover:text-flame-deep"
 								>
-									<Icon name="arrow-right" class="size-3.5 text-flame/60 transition group-hover:translate-x-0.5 group-hover:text-flame" />
+									<Icon name="arrow-right" class="size-3.5 text-flame/60 transition group-hover:translate-x-0.5 group-hover:text-flame-deep" />
 									{l.label}
 								</a>
 							</li>
@@ -113,7 +113,7 @@
 				</p>
 				<a
 					href="/contact"
-					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Contact us <Icon name="arrow-right" class="size-4" />
 				</a>

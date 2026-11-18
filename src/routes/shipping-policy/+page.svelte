@@ -45,7 +45,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-3xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Legal</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Legal</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">Shipping policy</h1>
 			<p class="mt-4 leading-relaxed text-muted">
 				Last updated: November 2026. How your furniture travels from our Covington workshop to your home.
@@ -63,12 +63,12 @@
 			<a href="/delivery" class="lift block rounded-3xl border border-orange-100 bg-white p-6">
 				<h2 class="font-display text-lg font-semibold text-ink">Delivery options</h2>
 				<p class="mt-2 text-sm leading-relaxed text-muted">Standard, white-glove and store pickup — times and prices at a glance.</p>
-				<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame">View delivery <Icon name="arrow-right" class="size-4" /></span>
+				<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep">View delivery <Icon name="arrow-right" class="size-4" /></span>
 			</a>
 			<a href="/track-order" class="lift block rounded-3xl border border-orange-100 bg-white p-6">
 				<h2 class="font-display text-lg font-semibold text-ink">Track my order</h2>
 				<p class="mt-2 text-sm leading-relaxed text-muted">Follow your order from the workshop to your front door.</p>
-				<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame">Track order <Icon name="arrow-right" class="size-4" /></span>
+				<span class="mt-4 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep">Track order <Icon name="arrow-right" class="size-4" /></span>
 			</a>
 		</div>
 	</div>

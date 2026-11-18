@@ -53,7 +53,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Contact</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Contact</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 				We would love to hear from you.
 			</h1>
@@ -67,14 +67,14 @@
 		<div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
 			{#each cards as c, i}
 				<div class="reveal lift rounded-3xl border border-orange-100 bg-white p-6" use:reveal style="--rd: {i * 80}ms">
-					<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame">
+					<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame-deep">
 						<Icon name={c.icon} class="size-6" />
 					</span>
 					<h2 class="mt-4 font-display text-lg font-semibold text-ink">{c.title}</h2>
 					{#each c.lines as line}
 						<p class="mt-1 text-sm leading-relaxed text-muted">{line}</p>
 					{/each}
-					<a href={c.href} class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame hover:text-flame-dark">
+					<a href={c.href} class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep hover:text-flame-deep">
 						{c.linkLabel} <Icon name="arrow-right" class="size-4" />
 					</a>
 				</div>
@@ -87,12 +87,12 @@
 				<h2 class="font-display text-2xl font-semibold text-ink sm:text-3xl">Send us a message</h2>
 				<p class="mt-3 leading-relaxed text-muted">
 					Fill in the form and your email app will open with your message ready to send — that is how your
-					message reaches us. Prefer to talk? Call us on <a href="tel:+19855550148" class="font-semibold text-flame underline underline-offset-2">{phone}</a>.
+					message reaches us. Prefer to talk? Call us on <a href="tel:+19855550148" class="font-semibold text-flame-deep underline underline-offset-2">{phone}</a>.
 				</p>
 				<ul class="mt-6 space-y-3">
 					{#each ['Order questions — tracking, changes and delivery dates', 'Trade enquiries — discounts and project support', 'Showroom visits — appointments and in-store orders'] as item}
 						<li class="flex items-start gap-3 text-sm font-medium text-cocoa">
-							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="check" class="size-3.5" />
 							</span>
 							{item}
@@ -103,21 +103,21 @@
 
 			{#if sent}
 				<div class="rounded-3xl border border-orange-100 bg-white p-8 text-center" role="status">
-					<span class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame">
+					<span class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame-deep">
 						<Icon name="mail" class="size-7" />
 					</span>
 					<h3 class="mt-4 font-display text-2xl font-semibold text-ink">Your email app should be open</h3>
 					<p class="mx-auto mt-2 max-w-md leading-relaxed text-muted">
 						We opened a pre-addressed email to {email} with your message. Press send in your email app
 						and it will reach our team — or if nothing opened, you can email us directly at
-						<a href="mailto:{email}" class="font-semibold text-flame underline underline-offset-2">{email}</a>.
+						<a href="mailto:{email}" class="font-semibold text-flame-deep underline underline-offset-2">{email}</a>.
 					</p>
 					<p class="mt-4 text-sm font-semibold text-ink">
-						In a hurry? Call us on <a href="tel:+19855550148" class="text-flame underline underline-offset-2">{phone}</a>.
+						In a hurry? Call us on <a href="tel:+19855550148" class="text-flame-deep underline underline-offset-2">{phone}</a>.
 					</p>
 					<button
 						type="button"
-						class="mt-6 inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+						class="mt-6 inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 						onclick={() => (sent = false)}
 					>
 						Write another message
@@ -142,7 +142,7 @@
 								aria-describedby={errors.name ? 'contact-name-error' : undefined}
 								class="w-full rounded-2xl border border-orange-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/60 focus:border-flame focus:outline-none"
 							/>
-							{#if errors.name}<p id="contact-name-error" class="mt-1.5 text-xs font-semibold text-flame">{errors.name}</p>{/if}
+							{#if errors.name}<p id="contact-name-error" class="mt-1.5 text-xs font-semibold text-flame-deep">{errors.name}</p>{/if}
 						</div>
 						<div>
 							<label for="contact-email" class="mb-1.5 block text-sm font-bold text-ink">Email address</label>
@@ -156,7 +156,7 @@
 								aria-describedby={errors.email ? 'contact-email-error' : undefined}
 								class="w-full rounded-2xl border border-orange-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/60 focus:border-flame focus:outline-none"
 							/>
-							{#if errors.email}<p id="contact-email-error" class="mt-1.5 text-xs font-semibold text-flame">{errors.email}</p>{/if}
+							{#if errors.email}<p id="contact-email-error" class="mt-1.5 text-xs font-semibold text-flame-deep">{errors.email}</p>{/if}
 						</div>
 					</div>
 					<div class="mt-5">
@@ -180,11 +180,11 @@
 							aria-describedby={errors.message ? 'contact-message-error' : undefined}
 							class="w-full resize-y rounded-2xl border border-orange-200 bg-white px-4 py-3 text-sm text-ink placeholder:text-muted/60 focus:border-flame focus:outline-none"
 						></textarea>
-						{#if errors.message}<p id="contact-message-error" class="mt-1.5 text-xs font-semibold text-flame">{errors.message}</p>{/if}
+						{#if errors.message}<p id="contact-message-error" class="mt-1.5 text-xs font-semibold text-flame-deep">{errors.message}</p>{/if}
 					</div>
 					<button
 						type="submit"
-						class="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-flame px-8 py-3 text-sm font-bold text-white transition hover:bg-flame-dark active:scale-[0.98]"
+						class="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-flame-dark px-8 py-3 text-sm font-bold text-white transition hover:bg-flame-deep active:scale-[0.98]"
 					>
 						<Icon name="mail" class="size-4" /> Open email to send
 					</button>

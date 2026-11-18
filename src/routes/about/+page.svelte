@@ -33,6 +33,14 @@
 		name="description"
 		content="Furniture began in a Covington, LA workshop in 2011. Kiln-dried hardwood, hand-finished pieces, a 10-year frame warranty and 1.3M+ happy customers."
 	/>
+	<link
+		rel="preload"
+		as="image"
+		href="/images/about-room.webp"
+		imagesrcset="/images/about-room-800.webp 800w, /images/about-room.webp 1920w"
+		imagesizes="(max-width: 1024px) 100vw, 600px"
+		fetchpriority="high"
+	/>
 </svelte:head>
 
 <!-- Hero -->
@@ -40,7 +48,7 @@
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-10 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="grid items-center gap-10 lg:grid-cols-2">
 			<div>
-				<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame uppercase" style="--d: 0ms">Our story</p>
+				<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame-deep uppercase" style="--d: 0ms">Our story</p>
 				<h1
 					class="hero-anim mt-3 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl lg:text-6xl"
 					style="--d: 80ms"
@@ -54,13 +62,13 @@
 				<div class="hero-anim mt-8 flex flex-wrap gap-3" style="--d: 240ms">
 					<a
 						href="/shop"
-						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 					>
 						Shop the collection <Icon name="arrow-right" class="size-4" />
 					</a>
 					<a
 						href="/showrooms"
-						class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+						class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 					>
 						Visit a showroom
 					</a>
@@ -70,15 +78,20 @@
 				<div class="overflow-hidden rounded-[2rem]">
 					<img
 						src="/images/about-room.webp"
+						srcset="/images/about-room-800.webp 800w, /images/about-room.webp 1920w"
+						sizes="(max-width: 1024px) 100vw, 600px"
+						width="1920"
+						height="1280"
 						alt="A bright living room furnished with a modern couch, plants and warm wooden furniture"
 						class="aspect-[4/3] w-full object-cover"
 						loading="eager"
+						fetchpriority="high"
 					/>
 				</div>
 				<div
 					class="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-lg sm:left-8"
 				>
-					<span class="grid size-11 shrink-0 place-items-center rounded-full bg-peach text-flame">
+					<span class="grid size-11 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 						<Icon name="sofa" class="size-5" />
 					</span>
 					<p class="text-sm leading-snug font-semibold text-ink">
@@ -92,7 +105,7 @@
 </section>
 
 <!-- Stats band -->
-<section class="bg-flame">
+<section class="bg-flame-dark">
 	<div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 		<div class="grid grid-cols-2 gap-8 lg:grid-cols-4">
 			{#each stats as s, i}
@@ -114,7 +127,7 @@
 	<div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 		<div class="grid items-center gap-10 lg:grid-cols-2">
 			<div class="reveal" use:reveal>
-				<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Craftsmanship</p>
+				<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Craftsmanship</p>
 				<h2 class="mt-3 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">
 					Built slowly, on purpose.
 				</h2>
@@ -127,7 +140,7 @@
 				<ul class="mt-6 space-y-3">
 					{#each ['Kiln-dried hardwood frames, dried for stability', 'Hand-finished in small batches — never mass-run', 'Stain-resistant, family-proof fabrics', '10-year frame warranty on every piece'] as item}
 						<li class="flex items-start gap-3 text-sm font-medium text-cocoa">
-							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="check" class="size-3.5" />
 							</span>
 							{item}
@@ -151,7 +164,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">What we stand for</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">What we stand for</p>
 			<h2 class="mt-3 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">
 				Good furniture, honest promises.
 			</h2>
@@ -163,7 +176,7 @@
 					use:reveal
 					style="--rd: {i * 80}ms"
 				>
-					<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame">
+					<span class="grid size-12 place-items-center rounded-2xl bg-peach text-flame-deep">
 						<Icon name={v.icon} class="size-6" />
 					</span>
 					<h3 class="mt-4 font-display text-lg font-semibold text-ink">{v.title}</h3>
@@ -178,7 +191,7 @@
 <section class="bg-white">
 	<div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">The journey</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">The journey</p>
 			<h2 class="mt-3 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">
 				Fifteen years, one workshop.
 			</h2>
@@ -187,10 +200,10 @@
 			{#each timeline as t, i}
 				<li class="reveal relative" use:reveal style="--rd: {i * 80}ms">
 					<span
-						class="absolute top-1 -left-8 grid size-8 -translate-x-1/2 place-items-center rounded-full bg-flame font-display text-xs font-bold text-white"
+						class="absolute top-1 -left-8 grid size-8 -translate-x-1/2 place-items-center rounded-full bg-flame-dark font-display text-xs font-bold text-white"
 						aria-hidden="true">{i + 1}</span
 					>
-					<p class="font-display text-sm font-bold text-flame">{t.year}</p>
+					<p class="font-display text-sm font-bold text-flame-deep">{t.year}</p>
 					<h3 class="mt-1 font-display text-xl font-semibold text-ink">{t.title}</h3>
 					<p class="mt-1 max-w-2xl text-sm leading-relaxed text-muted">{t.body}</p>
 				</li>
@@ -211,7 +224,7 @@
 			<div class="mt-7 flex flex-wrap justify-center gap-3">
 				<a
 					href="/shop"
-					class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Shop the collection <Icon name="arrow-right" class="size-4" />
 				</a>

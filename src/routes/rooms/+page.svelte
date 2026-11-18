@@ -1,21 +1,31 @@
 <script lang="ts">
 	import Icon from '#lib/components/Icon.svelte';
 	import { reveal } from '#lib/actions/reveal';
-	import { productsInRoom, rooms } from '#lib/data/products';
+	import { photoDims, photoSrcset, productsInRoom, rooms } from '#lib/data/products';
 </script>
 
 <svelte:head>
-	<title>Shop by room — Furniture | Living Room, Bedroom, Dining, Outdoor &amp; Office</title>
+	<title>Shop by room — Furniture | Living, Bedroom &amp; Dining</title>
 	<meta
 		name="description"
 		content="Shop furniture by room: living room, bedroom, dining room, outdoor and home office. Pieces chosen to fit the way each room is lived in."
 	/>
+	{#if photoSrcset(rooms[0].photo)}
+		<link
+			rel="preload"
+			as="image"
+			href={rooms[0].photo}
+			imagesrcset={photoSrcset(rooms[0].photo)}
+			imagesizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+			fetchpriority="high"
+		/>
+	{/if}
 </svelte:head>
 
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame uppercase">Shop by room</p>
+			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Shop by room</p>
 			<h1 class="mt-3 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl">
 				Furniture for every room
 			</h1>
@@ -36,16 +46,21 @@
 				>
 					<img
 						src={r.photo}
+						srcset={photoSrcset(r.photo)}
+						sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+						width={photoDims(r.photo)?.width}
+						height={photoDims(r.photo)?.height}
 						alt={r.name}
 						class="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
 						loading={i < 2 ? 'eager' : 'lazy'}
+						fetchpriority={i < 2 ? 'high' : undefined}
 						decoding="async"
 					/>
 					<span class="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/25 to-transparent" aria-hidden="true"></span>
 					<span class="absolute inset-x-0 bottom-0 p-5">
 						<span class="block font-display text-2xl font-semibold text-white">{r.name}</span>
 						<span class="mt-1 block text-sm leading-relaxed text-white/85">{r.blurb}</span>
-						<span class="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink transition group-hover:bg-flame group-hover:text-white">
+						<span class="mt-3 inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-bold text-ink transition group-hover:bg-flame-dark group-hover:text-white">
 							{count} {count === 1 ? 'piece' : 'pieces'}
 							<Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
 						</span>

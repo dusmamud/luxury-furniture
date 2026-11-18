@@ -465,3 +465,48 @@ export function formatPrice(n: number): string {
 export function monthlyPrice(n: number): string {
 	return '$' + Math.round(n / 12).toLocaleString('en-US');
 }
+
+// --- Responsive photo metadata -------------------------------------------
+// The big room photos are 1920px wide but shown at 256–600px. Right-sized
+// variants (-800 / -1200 WebP, same folder) keep the original as the 2x
+// fallback. Small photos (modern-chair.jpg, hanging-light.jpg, bamboo-swing)
+// are already small enough and have no variants.
+export type PhotoMeta = { w: number; h: number; variants: number[] };
+
+export const photoMeta: Record<string, PhotoMeta> = {
+	'/images/modern-couch.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/outdoor-lounge.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/hero-sofa.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/about-room.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/bed.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/dining-table.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/floor-lamp.webp': { w: 1920, h: 1280, variants: [800, 1200] },
+	'/images/bookshelf.webp': { w: 1280, h: 1920, variants: [800, 1200] },
+	'/images/indoor-plants.webp': { w: 900, h: 2098, variants: [800] },
+	// Small photos: no variants needed, but dims are recorded so <img> tags
+	// can carry width/height.
+	'/images/modern-chair.jpg': { w: 800, h: 800, variants: [] },
+	'/images/hanging-light.jpg': { w: 800, h: 800, variants: [] },
+	'/images/bamboo-swing.webp': { w: 700, h: 714, variants: [] }
+};
+
+/** srcset for a photo, or undefined when it has no variants. */
+export function photoSrcset(photo: string): string | undefined {
+	const m = photoMeta[photo];
+	if (!m || m.variants.length === 0) return undefined;
+	const stem = photo.replace(/\.webp$/, '');
+	const parts = m.variants.map((v) => `${stem}-${v}.webp ${v}w`);
+	parts.push(`${photo} ${m.w}w`);
+	return parts.join(', ');
+}
+
+/** Intrinsic dimensions for a photo, or undefined when unknown. */
+export function photoDims(photo: string): { width: number; height: number } | undefined {
+	const m = photoMeta[photo];
+	return m ? { width: m.w, height: m.h } : undefined;
+}
+
+/** SKU for structured data — stable, store-defined (no invented GTIN). */
+export function productSku(p: Product): string {
+	return `FUR-${p.slug.toUpperCase()}`;
+}

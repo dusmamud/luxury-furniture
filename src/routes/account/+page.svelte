@@ -103,7 +103,7 @@
 <div class="mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
 	{#if !shop.user}
 		<div use:reveal class="reveal mx-auto mt-6 max-w-xl rounded-3xl border border-orange-100 bg-white px-6 py-14 text-center">
-			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame">
+			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame-deep">
 				<Icon name="user" class="size-7" />
 			</span>
 			<h1 class="mt-5 font-display text-2xl font-semibold text-ink sm:text-3xl">Log in to your account</h1>
@@ -113,13 +113,13 @@
 			<div class="mt-6 flex flex-wrap items-center justify-center gap-3">
 				<a
 					href="/login"
-					class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Log in
 				</a>
 				<a
 					href="/signup"
-					class="inline-flex min-h-11 items-center rounded-full border border-orange-200 px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+					class="inline-flex min-h-11 items-center rounded-full border border-orange-200 px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 				>
 					Create an account
 				</a>
@@ -128,13 +128,13 @@
 	{:else}
 		<div use:reveal class="reveal flex flex-wrap items-start justify-between gap-4">
 			<div>
-				<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Furniture</p>
+				<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Furniture</p>
 				<h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Hello, {shop.user.name.split(' ')[0]}</h1>
 				<p class="mt-2 text-sm text-muted">{shop.user.email}</p>
 			</div>
 			<button
 				type="button"
-				class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+				class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 				onclick={() => shop.logout()}
 			>
 				<Icon name="close" class="size-4" /> Log out
@@ -145,7 +145,7 @@
 			<!-- Profile -->
 			<section use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 				<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink">
-					<Icon name="user" class="size-5 text-flame" /> Profile
+					<Icon name="user" class="size-5 text-flame-deep" /> Profile
 				</h2>
 				<form
 					class="mt-5"
@@ -157,10 +157,10 @@
 					<label for="acc-name" class="mb-1.5 block text-sm font-semibold text-ink">Full name</label>
 					<input id="acc-name" type="text" bind:value={profileName} autocomplete="name" class={inputCls} />
 					{#if profileMsg}
-						<p class="mt-2 text-sm font-medium text-flame" role="status">{profileMsg}</p>
+						<p class="mt-2 text-sm font-medium text-flame-deep" role="status">{profileMsg}</p>
 					{/if}
 					{#if profileErr}
-						<p class="mt-2 text-sm font-medium text-flame" role="alert">{profileErr}</p>
+						<p class="mt-2 text-sm font-medium text-flame-deep" role="alert">{profileErr}</p>
 					{/if}
 					<button
 						type="submit"
@@ -212,10 +212,10 @@
 						/>
 					</div>
 					{#if pwMsg}
-						<p class="text-sm font-medium text-flame" role="status">{pwMsg}</p>
+						<p class="text-sm font-medium text-flame-deep" role="status">{pwMsg}</p>
 					{/if}
 					{#if pwErr}
-						<p class="text-sm font-medium text-flame" role="alert">{pwErr}</p>
+						<p class="text-sm font-medium text-flame-deep" role="alert">{pwErr}</p>
 					{/if}
 					<button
 						type="submit"
@@ -230,11 +230,11 @@
 			<section use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 				<div class="flex items-center justify-between gap-3">
 					<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink">
-						<Icon name="pin" class="size-5 text-flame" /> Saved addresses
+						<Icon name="pin" class="size-5 text-flame-deep" /> Saved addresses
 					</h2>
 					<button
 						type="button"
-						class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-flame px-4 py-2.5 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="inline-flex min-h-11 items-center gap-1.5 rounded-full bg-flame-dark px-4 py-2.5 text-sm font-bold text-white transition hover:bg-flame-deep"
 						aria-expanded={showAddressForm}
 						onclick={() => (showAddressForm = !showAddressForm)}
 					>
@@ -255,56 +255,56 @@
 							<div>
 								<label for="addr-label" class="mb-1.5 block text-sm font-semibold text-ink">Label</label>
 								<input id="addr-label" type="text" bind:value={label} placeholder="Home" class={inputCls} />
-								{#if addrErrors.label}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.label}</p>{/if}
+								{#if addrErrors.label}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.label}</p>{/if}
 							</div>
 							<div>
 								<label for="addr-name" class="mb-1.5 block text-sm font-semibold text-ink">Recipient name</label>
 								<input id="addr-name" type="text" bind:value={aName} placeholder="Alexandra Morgan" class={inputCls} />
-								{#if addrErrors.name}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.name}</p>{/if}
+								{#if addrErrors.name}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.name}</p>{/if}
 							</div>
 							<div>
 								<label for="addr-email" class="mb-1.5 block text-sm font-semibold text-ink">Email</label>
 								<input id="addr-email" type="email" bind:value={aEmail} placeholder="you@example.com" class={inputCls} />
-								{#if addrErrors.email}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.email}</p>{/if}
+								{#if addrErrors.email}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.email}</p>{/if}
 							</div>
 							<div>
 								<label for="addr-phone" class="mb-1.5 block text-sm font-semibold text-ink">Phone</label>
 								<input id="addr-phone" type="tel" bind:value={aPhone} placeholder="(985) 555-0148" class={inputCls} />
-								{#if addrErrors.phone}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.phone}</p>{/if}
+								{#if addrErrors.phone}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.phone}</p>{/if}
 							</div>
 							<div class="sm:col-span-2">
 								<label for="addr-street" class="mb-1.5 block text-sm font-semibold text-ink">Street address</label>
 								<input id="addr-street" type="text" bind:value={aAddress} placeholder="800 Winward Drive, Suite A" class={inputCls} />
-								{#if addrErrors.address}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.address}</p>{/if}
+								{#if addrErrors.address}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.address}</p>{/if}
 							</div>
 							<div>
 								<label for="addr-city" class="mb-1.5 block text-sm font-semibold text-ink">City</label>
 								<input id="addr-city" type="text" bind:value={aCity} placeholder="Covington" class={inputCls} />
-								{#if addrErrors.city}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.city}</p>{/if}
+								{#if addrErrors.city}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.city}</p>{/if}
 							</div>
 							<div class="grid grid-cols-2 gap-4">
 								<div>
 									<label for="addr-state" class="mb-1.5 block text-sm font-semibold text-ink">State</label>
 									<input id="addr-state" type="text" bind:value={aState} placeholder="LA" class={inputCls} />
-									{#if addrErrors.state}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.state}</p>{/if}
+									{#if addrErrors.state}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.state}</p>{/if}
 								</div>
 								<div>
 									<label for="addr-zip" class="mb-1.5 block text-sm font-semibold text-ink">ZIP</label>
 									<input id="addr-zip" type="text" inputmode="numeric" bind:value={aZip} placeholder="70433" class={inputCls} />
-									{#if addrErrors.zip}<p class="mt-1 text-sm font-medium text-flame" role="alert">{addrErrors.zip}</p>{/if}
+									{#if addrErrors.zip}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{addrErrors.zip}</p>{/if}
 								</div>
 							</div>
 						</div>
 						<div class="flex gap-2">
 							<button
 								type="submit"
-								class="inline-flex min-h-11 items-center rounded-full bg-flame px-5 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+								class="inline-flex min-h-11 items-center rounded-full bg-flame-dark px-5 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 							>
 								Save address
 							</button>
 							<button
 								type="button"
-								class="inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+								class="inline-flex min-h-11 items-center rounded-full border border-orange-200 bg-white px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 								onclick={() => (showAddressForm = false)}
 							>
 								Cancel
@@ -326,7 +326,7 @@
 										<p class="flex flex-wrap items-center gap-2 text-sm font-bold text-ink">
 											{addr.label}
 											{#if addr.isDefault}
-												<span class="rounded-full bg-flame px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase">
+												<span class="rounded-full bg-flame-dark px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-white uppercase">
 													Default
 												</span>
 											{/if}
@@ -339,7 +339,7 @@
 									</div>
 									<button
 										type="button"
-										class="grid size-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-peach hover:text-flame"
+										class="grid size-10 shrink-0 place-items-center rounded-full text-muted transition hover:bg-peach hover:text-flame-deep"
 										aria-label="Remove address {addr.label}"
 										onclick={() => shop.removeAddress(addr.id)}
 									>
@@ -349,7 +349,7 @@
 								{#if !addr.isDefault}
 									<button
 										type="button"
-										class="mt-3 inline-flex min-h-11 items-center rounded-full border border-orange-200 px-4 py-2.5 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+										class="mt-3 inline-flex min-h-11 items-center rounded-full border border-orange-200 px-4 py-2.5 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 										onclick={() => shop.setDefaultAddress(addr.id)}
 									>
 										Set as default
@@ -366,9 +366,9 @@
 		<section use:reveal class="reveal mt-6 rounded-3xl border border-orange-100 bg-white p-6">
 			<div class="flex items-center justify-between gap-3">
 				<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink">
-					<Icon name="bag" class="size-5 text-flame" /> Recent orders
+					<Icon name="bag" class="size-5 text-flame-deep" /> Recent orders
 				</h2>
-				<a href="/orders" class="inline-flex min-h-11 items-center gap-1 rounded-full px-3 py-2.5 text-sm font-bold text-flame hover:underline">
+				<a href="/orders" class="inline-flex min-h-11 items-center gap-1 rounded-full px-3 py-2.5 text-sm font-bold text-flame-deep hover:underline">
 					View all <Icon name="arrow-right" class="size-4" />
 				</a>
 			</div>
@@ -378,7 +378,7 @@
 				</p>
 				<a
 					href="/shop"
-					class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-5 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-4 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-5 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Browse the collection <Icon name="arrow-right" class="size-4" />
 				</a>
@@ -388,9 +388,9 @@
 						<li class="flex flex-wrap items-center justify-between gap-3 py-4 first:pt-0 last:pb-0">
 							<div>
 								<p class="text-sm font-bold text-ink">
-									<a href="/track-order?id={order.id}" class="hover:text-flame">{order.id}</a>
+									<a href="/track-order?id={order.id}" class="hover:text-flame-deep">{order.id}</a>
 									{#if order.status === 'cancelled'}
-										<span class="ml-2 rounded-full bg-peach px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-flame uppercase">
+										<span class="ml-2 rounded-full bg-peach px-2.5 py-0.5 text-[11px] font-bold tracking-wide text-flame-deep uppercase">
 											Cancelled
 										</span>
 									{:else}

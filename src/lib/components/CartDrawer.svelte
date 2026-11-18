@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Icon from '#lib/components/Icon.svelte';
+	import CutoutPicture from '#lib/components/CutoutPicture.svelte';
 	import { formatPrice, getProduct } from '#lib/data/products';
 	import { shop, lineUnitPrice } from '#lib/data/store.svelte';
 	import { goto } from '$app/navigation';
@@ -30,10 +31,10 @@
 
 		{#if shop.cart.length === 0}
 			<div class="flex flex-1 flex-col items-center justify-center gap-3 px-6 text-center">
-				<span class="grid size-16 place-items-center rounded-full bg-peach text-flame"><Icon name="bag" class="size-8" /></span>
+				<span class="grid size-16 place-items-center rounded-full bg-peach text-flame-deep"><Icon name="bag" class="size-8" /></span>
 				<p class="font-display text-lg font-semibold text-ink">Your bag is empty</p>
 				<p class="text-sm text-muted">Beautiful pieces are waiting — start with our bestsellers.</p>
-				<a href="/shop" class="mt-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark" onclick={() => shop.closeCart()}>Shop furniture</a>
+				<a href="/shop" class="mt-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep" onclick={() => shop.closeCart()}>Shop furniture</a>
 			</div>
 		{:else}
 			<ul class="flex-1 space-y-4 overflow-y-auto px-5 py-4">
@@ -42,12 +43,12 @@
 					{#if p}
 						<li class="flex gap-3">
 							<a href="/product/{p.slug}" class="grid size-20 shrink-0 place-items-center overflow-hidden rounded-2xl bg-cream" onclick={() => shop.closeCart()}>
-								<img src="/images/cutouts/{p.cutout}.avif" alt={p.alt} class="max-h-20 w-auto object-contain" loading="lazy" />
+								<CutoutPicture stem={p.cutout} alt={p.alt} cls="max-h-20 w-auto object-contain" sizes="80px" />
 							</a>
 							<div class="min-w-0 flex-1">
 								<div class="flex items-start justify-between gap-2">
-									<a href="/product/{p.slug}" class="text-sm leading-snug font-semibold text-ink hover:text-flame" onclick={() => shop.closeCart()}>{p.name}</a>
-									<button type="button" class="text-muted transition hover:text-flame" aria-label="Remove {p.name}" onclick={() => shop.removeFromCart(item.id, item.variant)}>
+									<a href="/product/{p.slug}" class="text-sm leading-snug font-semibold text-ink hover:text-flame-deep" onclick={() => shop.closeCart()}>{p.name}</a>
+									<button type="button" class="text-muted transition hover:text-flame-deep" aria-label="Remove {p.name}" onclick={() => shop.removeFromCart(item.id, item.variant)}>
 										<Icon name="trash" class="size-4" />
 									</button>
 								</div>
@@ -67,13 +68,13 @@
 			</ul>
 			<div class="border-t border-orange-100 px-5 py-4">
 				{#if shop.cartDiscount > 0}
-					<p class="flex justify-between text-sm text-muted"><span>Discount ({shop.promoCode})</span><span class="font-semibold text-flame">−{formatPrice(shop.cartDiscount)}</span></p>
+					<p class="flex justify-between text-sm text-muted"><span>Discount ({shop.promoCode})</span><span class="font-semibold text-flame-deep">−{formatPrice(shop.cartDiscount)}</span></p>
 				{/if}
 				<p class="flex justify-between text-sm text-muted"><span>Shipping</span><span class="font-semibold text-ink">{shop.cartShipping === 0 ? 'Free' : formatPrice(shop.cartShipping)}</span></p>
 				<p class="mt-1 flex justify-between text-base font-bold text-ink"><span>Subtotal</span><span>{formatPrice(shop.cartTotal)}</span></p>
 				<p class="mt-1 text-xs text-muted">Free shipping over $499 · 30-day returns · 10-year frame warranty on sofas.</p>
-				<button type="button" class="mt-4 w-full rounded-full bg-flame px-6 py-3.5 text-sm font-bold text-white transition hover:bg-flame-dark" onclick={checkout}>Checkout</button>
-				<a href="/cart" class="mt-2 block text-center text-sm font-semibold text-flame hover:underline" onclick={() => shop.closeCart()}>View full bag</a>
+				<button type="button" class="mt-4 w-full rounded-full bg-flame-dark px-6 py-3.5 text-sm font-bold text-white transition hover:bg-flame-deep" onclick={checkout}>Checkout</button>
+				<a href="/cart" class="mt-2 block text-center text-sm font-semibold text-flame-deep hover:underline" onclick={() => shop.closeCart()}>View full bag</a>
 			</div>
 		{/if}
 	</div>

@@ -29,13 +29,21 @@
 		name="description"
 		content="Spread the cost with 0% APR for 12 months on orders over $100 — 18 months over $1,000. No deposit, no hidden fees. Try the monthly payment calculator."
 	/>
+	<link
+		rel="preload"
+		as="image"
+		href="/images/modern-couch.webp"
+		imagesrcset="/images/modern-couch-800.webp 800w, /images/modern-couch.webp 1920w"
+		imagesizes="(max-width: 1024px) 100vw, 600px"
+		fetchpriority="high"
+	/>
 </svelte:head>
 
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="grid items-center gap-10 lg:grid-cols-2">
 			<div class="reveal" use:reveal>
-				<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Financing</p>
+				<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Financing</p>
 				<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 					0% APR for 12 months. The sofa now, the payments spread out.
 				</h1>
@@ -46,13 +54,13 @@
 				<div class="mt-8 flex flex-wrap gap-3">
 					<a
 						href="/shop"
-						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 					>
 						Shop with financing <Icon name="arrow-right" class="size-4" />
 					</a>
 					<a
 						href="#calculator"
-						class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+						class="inline-flex min-h-11 items-center gap-2 rounded-full border border-orange-200 bg-white px-6 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 					>
 						Try the calculator
 					</a>
@@ -61,9 +69,14 @@
 			<div class="reveal overflow-hidden rounded-[2rem]" use:reveal style="--rd: 120ms">
 				<img
 					src="/images/modern-couch.webp"
+					srcset="/images/modern-couch-800.webp 800w, /images/modern-couch.webp 1920w"
+					sizes="(max-width: 1024px) 100vw, 600px"
+					width="1920"
+					height="1280"
 					alt="Modern grey three-seater couch — available on 0% APR financing"
 					class="aspect-[4/3] w-full object-cover"
 					loading="eager"
+					fetchpriority="high"
 				/>
 			</div>
 		</div>
@@ -106,7 +119,7 @@
 										aria-pressed={months === m}
 										onclick={() => (months = m)}
 										class="min-h-11 rounded-full px-5 py-2.5 text-sm font-bold transition {months === m
-											? 'bg-flame text-white'
+											? 'bg-flame-dark text-white'
 											: 'bg-white/10 text-white hover:bg-white/20'}"
 									>
 										{m} months
@@ -129,7 +142,7 @@
 					</p>
 					<a
 						href="/shop"
-						class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 					>
 						Shop the collection <Icon name="arrow-right" class="size-4" />
 					</a>
@@ -140,7 +153,7 @@
 		<!-- How it works -->
 		<div class="mt-16">
 			<div class="reveal max-w-2xl" use:reveal>
-				<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">How it works</p>
+				<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">How it works</p>
 				<h2 class="mt-3 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl">
 					Three steps, one minute at checkout.
 				</h2>
@@ -148,7 +161,7 @@
 			<ol class="mt-10 grid gap-5 md:grid-cols-3">
 				{#each steps as s, i}
 					<li class="reveal lift rounded-3xl border border-orange-100 bg-white p-6" use:reveal style="--rd: {i * 80}ms">
-						<span class="grid size-11 place-items-center rounded-full bg-flame font-display text-lg font-bold text-white">{s.n}</span>
+						<span class="grid size-11 place-items-center rounded-full bg-flame-dark font-display text-lg font-bold text-white">{s.n}</span>
 						<h3 class="mt-4 font-display text-lg font-semibold text-ink">{s.title}</h3>
 						<p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
 					</li>
@@ -163,7 +176,7 @@
 				<ul class="mt-6 space-y-3">
 					{#each eligibility as item}
 						<li class="flex items-start gap-3 text-sm leading-relaxed font-medium text-cocoa">
-							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="check" class="size-3.5" />
 							</span>
 							{item}
@@ -197,7 +210,7 @@
 						Returns work the same way within 30 days. Once the return is processed, the finance
 						agreement is cancelled and any payments you made are refunded.
 					</p>
-					<a href="/faq" class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame">
+					<a href="/faq" class="mt-3 inline-flex min-h-11 items-center gap-1 text-sm font-bold text-flame-deep">
 						More in the FAQ <Icon name="arrow-right" class="size-4" />
 					</a>
 				</div>

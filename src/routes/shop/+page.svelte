@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { goto } from '$app/navigation';
 	import Icon from '#lib/components/Icon.svelte';
 	import ProductCard from '#lib/components/ProductCard.svelte';
@@ -68,7 +68,7 @@
 </script>
 
 <svelte:head>
-	<title>Shop all furniture — Furniture | Sofas, Chairs, Tables &amp; Lighting</title>
+	<title>Shop all furniture — Furniture | Sofas, Chairs &amp; More</title>
 	<meta
 		name="description"
 		content="Shop all furniture: sofas, chairs, tables, lighting, storage, bedroom and outdoor pieces. Free shipping over $499, 3-day delivery, 10-year warranty."
@@ -78,7 +78,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame uppercase">Shop</p>
+			<p class="hero-anim text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Shop</p>
 			<h1 class="mt-3 font-display text-4xl leading-[1.08] font-semibold text-ink sm:text-5xl">
 				Shop all furniture
 			</h1>
@@ -107,7 +107,7 @@
 				/>
 				<button
 					type="submit"
-					class="absolute top-1/2 right-1.5 min-h-9 -translate-y-1/2 rounded-full bg-flame px-5 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="absolute top-1/2 right-1.5 min-h-9 -translate-y-1/2 rounded-full bg-flame-dark px-5 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Search
 				</button>
@@ -122,8 +122,8 @@
 					href={linkWith({ category: undefined })}
 					aria-current={category === '' ? 'true' : undefined}
 					class="inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition {category === ''
-						? 'border-flame bg-flame text-white'
-						: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame'}"
+						? 'border-flame bg-flame-dark text-white'
+						: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame-deep'}"
 				>
 					All
 				</a>
@@ -132,8 +132,8 @@
 						href={linkWith({ category: c.slug })}
 						aria-current={category === c.slug ? 'true' : undefined}
 						class="inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition {category === c.slug
-							? 'border-flame bg-flame text-white'
-							: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame'}"
+							? 'border-flame bg-flame-dark text-white'
+							: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame-deep'}"
 					>
 						{c.name}
 					</a>
@@ -149,8 +149,8 @@
 					href={linkWith({ room: undefined })}
 					aria-current={room === '' ? 'true' : undefined}
 					class="inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition {room === ''
-						? 'border-flame bg-flame text-white'
-						: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame'}"
+						? 'border-flame bg-flame-dark text-white'
+						: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame-deep'}"
 				>
 					All rooms
 				</a>
@@ -159,8 +159,8 @@
 						href={linkWith({ room: r.slug })}
 						aria-current={room === r.slug ? 'true' : undefined}
 						class="inline-flex min-h-11 items-center rounded-full border px-4 py-2 text-sm font-semibold transition {room === r.slug
-							? 'border-flame bg-flame text-white'
-							: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame'}"
+							? 'border-flame bg-flame-dark text-white'
+							: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame-deep'}"
 					>
 						{r.name}
 					</a>
@@ -208,7 +208,7 @@
 			</div>
 		{:else}
 			<div class="reveal mx-auto max-w-md rounded-3xl bg-white p-8 text-center shadow-sm" use:reveal>
-				<div class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame">
+				<div class="mx-auto grid size-14 place-items-center rounded-full bg-peach text-flame-deep">
 					<Icon name="search" class="size-6" />
 				</div>
 				<h2 class="mt-4 font-display text-2xl font-semibold text-ink">Nothing found</h2>
@@ -222,7 +222,7 @@
 				</p>
 				<a
 					href="/shop"
-					class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Clear filters
 				</a>

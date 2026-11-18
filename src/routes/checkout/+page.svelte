@@ -89,7 +89,7 @@
 
 <div class="mx-auto max-w-7xl px-4 pt-8 pb-16 sm:px-6 lg:px-8">
 	<div use:reveal class="reveal">
-		<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Furniture</p>
+		<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Furniture</p>
 		<h1 class="mt-2 font-display text-3xl font-bold text-ink sm:text-4xl">Checkout</h1>
 		<p class="mt-2 max-w-xl text-sm leading-relaxed text-muted sm:text-base">
 			Almost there — tell us where your furniture is going and how you would like to pay.
@@ -98,7 +98,7 @@
 
 	{#if shop.cart.length === 0}
 		<div use:reveal class="reveal mt-10 rounded-3xl border border-orange-100 bg-white px-6 py-14 text-center">
-			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame">
+			<span class="mx-auto grid size-16 place-items-center rounded-full bg-peach text-flame-deep">
 				<Icon name="bag" class="size-7" />
 			</span>
 			<h2 class="mt-5 font-display text-2xl font-semibold text-ink">Your bag is empty</h2>
@@ -107,7 +107,7 @@
 			</p>
 			<a
 				href="/shop"
-				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="mt-6 inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 			>
 				Browse the collection <Icon name="arrow-right" class="size-4" />
 			</a>
@@ -125,7 +125,7 @@
 				<!-- Contact -->
 				<section use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 					<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink">
-						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame">1</span>
+						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame-deep">1</span>
 						Contact
 					</h2>
 					<div class="mt-5 grid gap-4 sm:grid-cols-2">
@@ -140,7 +140,7 @@
 								aria-invalid={errors.name ? 'true' : undefined}
 								class="{inputCls} {errors.name ? 'border-flame' : ''}"
 							/>
-							{#if errors.name}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.name}</p>{/if}
+							{#if errors.name}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.name}</p>{/if}
 						</div>
 						<div>
 							<label for="co-email" class="mb-1.5 block text-sm font-semibold text-ink">Email</label>
@@ -153,7 +153,7 @@
 								aria-invalid={errors.email ? 'true' : undefined}
 								class="{inputCls} {errors.email ? 'border-flame' : ''}"
 							/>
-							{#if errors.email}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.email}</p>{/if}
+							{#if errors.email}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.email}</p>{/if}
 						</div>
 						<div class="sm:col-span-2">
 							<label for="co-phone" class="mb-1.5 block text-sm font-semibold text-ink">Phone</label>
@@ -166,7 +166,7 @@
 								aria-invalid={errors.phone ? 'true' : undefined}
 								class="{inputCls} {errors.phone ? 'border-flame' : ''}"
 							/>
-							{#if errors.phone}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.phone}</p>{/if}
+							{#if errors.phone}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.phone}</p>{/if}
 						</div>
 					</div>
 				</section>
@@ -174,7 +174,7 @@
 				<!-- Shipping address -->
 				<section use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 					<h2 class="flex items-center gap-2 font-display text-xl font-semibold text-ink">
-						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame">2</span>
+						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame-deep">2</span>
 						Shipping address
 					</h2>
 					<div class="mt-5 grid gap-4 sm:grid-cols-2">
@@ -189,7 +189,7 @@
 								aria-invalid={errors.address ? 'true' : undefined}
 								class="{inputCls} {errors.address ? 'border-flame' : ''}"
 							/>
-							{#if errors.address}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.address}</p>{/if}
+							{#if errors.address}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.address}</p>{/if}
 						</div>
 						<div>
 							<label for="co-city" class="mb-1.5 block text-sm font-semibold text-ink">City</label>
@@ -202,7 +202,7 @@
 								aria-invalid={errors.city ? 'true' : undefined}
 								class="{inputCls} {errors.city ? 'border-flame' : ''}"
 							/>
-							{#if errors.city}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.city}</p>{/if}
+							{#if errors.city}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.city}</p>{/if}
 						</div>
 						<div class="grid grid-cols-2 gap-4">
 							<div>
@@ -216,7 +216,7 @@
 									aria-invalid={errors.state ? 'true' : undefined}
 									class="{inputCls} {errors.state ? 'border-flame' : ''}"
 								/>
-								{#if errors.state}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.state}</p>{/if}
+								{#if errors.state}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.state}</p>{/if}
 							</div>
 							<div>
 								<label for="co-zip" class="mb-1.5 block text-sm font-semibold text-ink">ZIP</label>
@@ -230,7 +230,7 @@
 									aria-invalid={errors.zip ? 'true' : undefined}
 									class="{inputCls} {errors.zip ? 'border-flame' : ''}"
 								/>
-								{#if errors.zip}<p class="mt-1 text-sm font-medium text-flame" role="alert">{errors.zip}</p>{/if}
+								{#if errors.zip}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{errors.zip}</p>{/if}
 							</div>
 						</div>
 					</div>
@@ -239,7 +239,7 @@
 				<!-- Delivery -->
 				<fieldset use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 					<legend class="flex items-center gap-2 px-1 font-display text-xl font-semibold text-ink">
-						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame">3</span>
+						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame-deep">3</span>
 						Delivery
 					</legend>
 					<div class="mt-5 space-y-3">
@@ -297,7 +297,7 @@
 				<!-- Payment -->
 				<fieldset use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6">
 					<legend class="flex items-center gap-2 px-1 font-display text-xl font-semibold text-ink">
-						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame">4</span>
+						<span class="grid size-8 place-items-center rounded-full bg-peach text-sm font-bold text-flame-deep">4</span>
 						Payment
 					</legend>
 					<div class="mt-5 space-y-3">
@@ -409,7 +409,7 @@
 					{#if shop.cartDiscount > 0}
 						<div class="flex justify-between">
 							<dt class="text-muted">Discount ({shop.promoCode})</dt>
-							<dd class="font-semibold text-flame">−{formatPrice(shop.cartDiscount)}</dd>
+							<dd class="font-semibold text-flame-deep">−{formatPrice(shop.cartDiscount)}</dd>
 						</div>
 					{/if}
 					<div class="flex justify-between">
@@ -434,7 +434,7 @@
 				</dl>
 				<button
 					type="submit"
-					class="mt-6 flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+					class="mt-6 flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 				>
 					Place order · {formatPrice(orderTotal)}
 				</button>
@@ -444,7 +444,7 @@
 				</p>
 				<a
 					href="/cart"
-					class="mt-2 flex min-h-11 items-center justify-center gap-2 rounded-full border border-orange-200 px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame"
+					class="mt-2 flex min-h-11 items-center justify-center gap-2 rounded-full border border-orange-200 px-5 py-3 text-sm font-bold text-ink transition hover:border-flame hover:text-flame-deep"
 				>
 					<Icon name="arrow-right" class="size-4 rotate-180" /> Back to bag
 				</a>

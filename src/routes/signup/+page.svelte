@@ -39,7 +39,7 @@
 
 <div class="mx-auto max-w-md px-4 pt-10 pb-16 sm:px-6">
 	<div use:reveal class="reveal rounded-3xl border border-orange-100 bg-white p-6 sm:p-8">
-		<p class="text-xs font-bold tracking-[0.2em] text-flame uppercase">Join Furniture</p>
+		<p class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase">Join Furniture</p>
 		<h1 class="mt-2 font-display text-3xl font-bold text-ink">Create an account</h1>
 		<p class="mt-2 text-sm leading-relaxed text-muted">
 			Track orders, save delivery addresses and keep your wishlist in one place.
@@ -64,7 +64,7 @@
 					aria-invalid={fieldErrors.name ? 'true' : undefined}
 					class="{inputCls} {fieldErrors.name ? 'border-flame' : ''}"
 				/>
-				{#if fieldErrors.name}<p class="mt-1 text-sm font-medium text-flame" role="alert">{fieldErrors.name}</p>{/if}
+				{#if fieldErrors.name}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{fieldErrors.name}</p>{/if}
 			</div>
 			<div>
 				<label for="signup-email" class="mb-1.5 block text-sm font-semibold text-ink">Email</label>
@@ -77,7 +77,7 @@
 					aria-invalid={fieldErrors.email ? 'true' : undefined}
 					class="{inputCls} {fieldErrors.email ? 'border-flame' : ''}"
 				/>
-				{#if fieldErrors.email}<p class="mt-1 text-sm font-medium text-flame" role="alert">{fieldErrors.email}</p>{/if}
+				{#if fieldErrors.email}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{fieldErrors.email}</p>{/if}
 			</div>
 			<div>
 				<label for="signup-password" class="mb-1.5 block text-sm font-semibold text-ink">Password</label>
@@ -90,7 +90,7 @@
 					aria-invalid={fieldErrors.password ? 'true' : undefined}
 					class="{inputCls} {fieldErrors.password ? 'border-flame' : ''}"
 				/>
-				{#if fieldErrors.password}<p class="mt-1 text-sm font-medium text-flame" role="alert">{fieldErrors.password}</p>{/if}
+				{#if fieldErrors.password}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{fieldErrors.password}</p>{/if}
 			</div>
 			<div>
 				<label for="signup-confirm" class="mb-1.5 block text-sm font-semibold text-ink">Confirm password</label>
@@ -103,16 +103,16 @@
 					aria-invalid={fieldErrors.confirm ? 'true' : undefined}
 					class="{inputCls} {fieldErrors.confirm ? 'border-flame' : ''}"
 				/>
-				{#if fieldErrors.confirm}<p class="mt-1 text-sm font-medium text-flame" role="alert">{fieldErrors.confirm}</p>{/if}
+				{#if fieldErrors.confirm}<p class="mt-1 text-sm font-medium text-flame-deep" role="alert">{fieldErrors.confirm}</p>{/if}
 			</div>
 			{#if error}
-				<p class="flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-semibold text-flame" role="alert">
+				<p class="flex items-center gap-2 rounded-2xl bg-peach px-4 py-3 text-sm font-semibold text-flame-deep" role="alert">
 					<Icon name="close" class="size-4 shrink-0" /> {error}
 				</p>
 			{/if}
 			<button
 				type="submit"
-				class="flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+				class="flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 			>
 				Create account <Icon name="arrow-right" class="size-4" />
 			</button>
@@ -120,7 +120,7 @@
 
 		<p class="mt-6 text-center text-sm text-muted">
 			Already have an account?
-			<a href="/login" class="font-bold text-flame hover:underline">Log in</a>
+			<a href="/login" class="font-bold text-flame-deep hover:underline">Log in</a>
 		</p>
 	</div>
 </div>

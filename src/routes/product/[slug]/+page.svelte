@@ -4,7 +4,7 @@
 	import CutoutPicture from '#lib/components/CutoutPicture.svelte';
 	import ProductCard from '#lib/components/ProductCard.svelte';
 	import { reveal } from '#lib/actions/reveal';
-	import { formatPrice, getCategory, getProduct, monthlyPrice, productsInCategory } from '#lib/data/products';
+	import { formatPrice, getCategory, getProduct, monthlyPrice, photoDims, photoSrcset, productsInCategory, productSku } from '#lib/data/products';
 	import { shop } from '#lib/data/store.svelte';
 	import type { PageData } from './$types';
 
@@ -38,8 +38,11 @@
 		name: product.name,
 		description: product.description,
 		image: `https://luxury-furniture.pages.dev${product.photo}`,
+		brand: { '@type': 'Brand', name: 'Furniture' },
+		sku: productSku(product),
 		offers: {
 			'@type': 'Offer',
+			url: `https://luxury-furniture.pages.dev/product/${product.slug}`,
 			priceCurrency: 'USD',
 			price: unitPrice,
 			availability: product.stock > 0 ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
@@ -48,8 +51,50 @@
 			'@type': 'AggregateRating',
 			ratingValue: product.rating,
 			reviewCount: product.reviewCount
-		}
+		},
+		// Shipping and returns live once at Organization level in the layout
+		// (Google accepts that since 2024/2025) instead of on every product.
+		...(product.seedReviews[0]
+			? {
+					review: {
+						'@type': 'Review',
+						author: { '@type': 'Person', name: product.seedReviews[0].author },
+						reviewRating: {
+							'@type': 'Rating',
+							ratingValue: product.seedReviews[0].rating,
+							bestRating: 5
+						},
+						reviewBody: product.seedReviews[0].body
+					}
+				}
+			: {})
 	});
+	let breadcrumbJsonLd = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Shop', item: 'https://luxury-furniture.pages.dev/shop' },
+			...(category
+				? [
+						{
+							'@type': 'ListItem',
+							position: 2,
+							name: category.name,
+							item: `https://luxury-furniture.pages.dev/categories/${category.slug}`
+						}
+					]
+				: []),
+			{
+				'@type': 'ListItem',
+				position: category ? 3 : 2,
+				name: product.name,
+				item: `https://luxury-furniture.pages.dev/product/${product.slug}`
+			}
+		]
+	});
+	// Right-sized LCP photo: srcset + intrinsic dimensions for the gallery image.
+	let gallerySrcset = $derived(photoSrcset(product.photo));
+	let galleryDims = $derived(photoDims(product.photo));
 	let wished = $derived(shop.isWished(product.id));
 	let reviews = $derived(shop.getReviews(product.id));
 
@@ -113,7 +158,7 @@
 </script>
 
 {#snippet stars(rating: number, size = 'size-4')}
-	<span class="inline-flex items-center gap-0.5" aria-label={`Rated ${rating.toFixed(1)} out of 5`}>
+	<span class="inline-flex items-center gap-0.5" role="img" aria-label={`Rated ${rating.toFixed(1)} out of 5`}>
 		{#each Array(5) as _, i}
 			<Icon name="star" class="{size} {i < Math.round(rating) ? 'text-gold' : 'text-orange-200'}" />
 		{/each}
@@ -124,19 +169,23 @@
 	<title>{product.name} — Furniture | {formatPrice(unitPrice)}</title>
 	<meta
 		name="description"
-		content="{product.name}: {product.blurb} Rated {product.rating.toFixed(1)} by {product.reviewCount} customers. {product.deliveryDays} delivery, {product.warranty}."
+		content="{product.name}: {product.blurb} Rated {product.rating.toFixed(1)} by {product.reviewCount} customers. {product.deliveryDays} delivery."
 	/>
+	{#if gallerySrcset}
+		<link rel="preload" as="image" imagesrcset={gallerySrcset} imagesizes="(max-width: 1024px) 100vw, 600px" fetchpriority="high" />
+	{/if}
 	{@html `<script type="application/ld+json">${JSON.stringify(productJsonLd)}</script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbJsonLd)}</script>`}
 </svelte:head>
 
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-6 pb-14 sm:px-6 lg:px-8 lg:pt-10">
 		<!-- Breadcrumb -->
 		<nav aria-label="Breadcrumb" class="reveal text-sm text-muted" use:reveal>
-			<a href="/shop" class="font-semibold hover:text-flame">Shop</a>
+			<a href="/shop" class="font-semibold hover:text-flame-deep">Shop</a>
 			<span class="mx-2" aria-hidden="true">/</span>
 			{#if category}
-				<a href="/categories/{category.slug}" class="font-semibold hover:text-flame">{category.name}</a>
+				<a href="/categories/{category.slug}" class="font-semibold hover:text-flame-deep">{category.name}</a>
 				<span class="mx-2" aria-hidden="true">/</span>
 			{/if}
 			<span class="text-ink" aria-current="page">{product.name}</span>
@@ -147,7 +196,7 @@
 			<div class="reveal" use:reveal>
 				<div class="relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-peach-2 via-peach to-sand px-6 pt-8 pb-4">
 					{#if product.badge}
-						<span class="absolute top-4 left-4 z-10 rounded-full bg-flame px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
+						<span class="absolute top-4 left-4 z-10 rounded-full bg-flame-dark px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
 							{product.badge}
 						</span>
 					{/if}
@@ -157,7 +206,7 @@
 						</span>
 					{/if}
 					<div class="cutout-zoom mx-auto aspect-square max-w-[480px]">
-						<CutoutPicture stem={product.cutout} alt={product.alt} eager={true} />
+						<CutoutPicture stem={product.cutout} alt={product.alt} eager={true} sizes="(max-width: 1024px) 90vw, 480px" />
 					</div>
 				</div>
 				<figure class="mt-4 overflow-hidden rounded-[2rem] border border-orange-100 bg-white">
@@ -165,11 +214,16 @@
 						src={product.photo}
 						alt={product.alt}
 						class="aspect-[16/10] w-full object-cover"
-						loading="lazy"
+						srcset={gallerySrcset}
+						sizes="(max-width: 1024px) 100vw, 600px"
+						width={galleryDims?.width}
+						height={galleryDims?.height}
+						loading="eager"
+						fetchpriority="high"
 						decoding="async"
 					/>
 					<figcaption class="flex items-center gap-2 px-5 py-3 text-xs font-semibold text-muted">
-						<Icon name="eye" class="size-4 text-flame" /> In situ — styled in a real room
+						<Icon name="eye" class="size-4 text-flame-deep" /> In situ — styled in a real room
 					</figcaption>
 				</figure>
 			</div>
@@ -179,7 +233,7 @@
 				{#if category}
 					<a
 						href="/categories/{category.slug}"
-						class="text-xs font-bold tracking-[0.2em] text-flame uppercase hover:text-flame-dark"
+						class="text-xs font-bold tracking-[0.2em] text-flame-deep uppercase hover:text-flame-deep"
 					>
 						{category.name}
 					</a>
@@ -187,7 +241,7 @@
 				<h1 class="mt-2 font-display text-3xl leading-tight font-semibold text-ink sm:text-4xl lg:text-[2.75rem]">
 					{product.name}
 				</h1>
-				<a href="#reviews" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-cocoa hover:text-flame">
+				<a href="#reviews" class="mt-3 inline-flex items-center gap-2 text-sm font-semibold text-cocoa hover:text-flame-deep">
 					{@render stars(product.rating)}
 					<span>{product.rating.toFixed(1)}</span>
 					<span class="font-normal text-muted">({product.reviewCount} reviews)</span>
@@ -197,7 +251,7 @@
 					<span class="font-display text-3xl font-bold text-ink">{formatPrice(unitPrice)}</span>
 					{#if product.compareAt}
 						<span class="text-lg text-muted line-through">{formatPrice(product.compareAt)}</span>
-						<span class="rounded-full bg-flame/10 px-3 py-1 text-xs font-bold text-flame">
+						<span class="rounded-full bg-flame/10 px-3 py-1 text-xs font-bold text-flame-deep">
 							Save {formatPrice(product.compareAt - product.price)}
 						</span>
 					{/if}
@@ -221,7 +275,7 @@
 								onclick={() => (optionIdx = i)}
 								class="min-h-11 rounded-full border px-4 py-2 text-sm font-semibold transition {optionIdx === i
 									? 'border-ink bg-ink text-white'
-									: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame'}"
+									: 'border-orange-200 bg-white text-ink hover:border-flame hover:text-flame-deep'}"
 							>
 								{c}
 								{#if product.option.priceDeltas?.[i]}
@@ -233,7 +287,7 @@
 				</fieldset>
 
 				<!-- Stock -->
-				<p class="mt-6 flex items-center gap-2 text-sm font-semibold {lowStock ? 'text-flame' : 'text-green-700'}">
+				<p class="mt-6 flex items-center gap-2 text-sm font-semibold {lowStock ? 'text-flame-deep' : 'text-green-700'}">
 					<Icon name={lowStock ? 'clock' : 'check'} class="size-4" />
 					{#if lowStock}
 						Only {product.stock} left — order soon
@@ -250,7 +304,7 @@
 							aria-label="Decrease quantity"
 							disabled={qty <= 1}
 							onclick={() => (qty = Math.max(1, qty - 1))}
-							class="grid size-12 place-items-center rounded-full text-ink transition hover:text-flame disabled:opacity-30"
+							class="grid size-12 place-items-center rounded-full text-ink transition hover:text-flame-deep disabled:opacity-30"
 						>
 							<Icon name="minus" class="size-4" />
 						</button>
@@ -260,7 +314,7 @@
 							aria-label="Increase quantity"
 							disabled={qty >= product.stock}
 							onclick={() => (qty = Math.min(product.stock, qty + 1))}
-							class="grid size-12 place-items-center rounded-full text-ink transition hover:text-flame disabled:opacity-30"
+							class="grid size-12 place-items-center rounded-full text-ink transition hover:text-flame-deep disabled:opacity-30"
 						>
 							<Icon name="plus" class="size-4" />
 						</button>
@@ -268,7 +322,7 @@
 					<button
 						type="button"
 						onclick={() => shop.addToCart(product.id, qty, { variant: choice })}
-						class="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-base font-bold text-white transition hover:bg-flame-dark active:scale-[0.98]"
+						class="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-base font-bold text-white transition hover:bg-flame-deep active:scale-[0.98]"
 					>
 						<Icon name="bag" class="size-5" /> Add to bag — {formatPrice(unitPrice * qty)}
 					</button>
@@ -278,8 +332,8 @@
 						aria-label={wished ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`}
 						onclick={() => shop.toggleWishlist(product.id)}
 						class="grid size-12 place-items-center rounded-full border transition {wished
-							? 'border-flame bg-flame/10 text-flame'
-							: 'border-orange-200 bg-white text-muted hover:border-flame hover:text-flame'}"
+							? 'border-flame bg-flame/10 text-flame-deep'
+							: 'border-orange-200 bg-white text-muted hover:border-flame hover:text-flame-deep'}"
 					>
 						<Icon name="heart" class="size-5" />
 					</button>
@@ -288,21 +342,21 @@
 				<!-- Trust row -->
 				<ul class="mt-7 grid gap-3 rounded-3xl border border-orange-100 bg-white p-5 sm:grid-cols-3">
 					<li class="flex items-start gap-3">
-						<Icon name="truck" class="mt-0.5 size-5 shrink-0 text-flame" />
+						<Icon name="truck" class="mt-0.5 size-5 shrink-0 text-flame-deep" />
 						<span class="text-xs leading-relaxed text-cocoa">
 							<strong class="block text-sm text-ink">Free shipping over $499</strong>
 							Delivered in {product.deliveryDays}
 						</span>
 					</li>
 					<li class="flex items-start gap-3">
-						<Icon name="shield" class="mt-0.5 size-5 shrink-0 text-flame" />
+						<Icon name="shield" class="mt-0.5 size-5 shrink-0 text-flame-deep" />
 						<span class="text-xs leading-relaxed text-cocoa">
 							<strong class="block text-sm text-ink">Warranty included</strong>
 							{product.warranty}
 						</span>
 					</li>
 					<li class="flex items-start gap-3">
-						<Icon name="refresh" class="mt-0.5 size-5 shrink-0 text-flame" />
+						<Icon name="refresh" class="mt-0.5 size-5 shrink-0 text-flame-deep" />
 						<span class="text-xs leading-relaxed text-cocoa">
 							<strong class="block text-sm text-ink">30-day returns</strong>
 							Free collection if it is not right
@@ -324,7 +378,7 @@
 				<ul class="mt-6 space-y-3">
 					{#each product.features as f (f)}
 						<li class="flex items-start gap-3 text-sm leading-relaxed text-cocoa">
-							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-flame/10 text-flame">
+							<span class="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-flame/10 text-flame-deep">
 								<Icon name="check" class="size-3.5" />
 							</span>
 							{f}
@@ -365,8 +419,8 @@
 				</dl>
 				<p class="mt-5 text-sm leading-relaxed text-muted">
 					Delivery in {product.deliveryDays} with tracking. Free 30-day returns — we collect it from your
-					door. <a href="/delivery" class="font-semibold text-flame hover:underline">Delivery info</a> ·
-					<a href="/returns-policy" class="font-semibold text-flame hover:underline">Returns policy</a>
+					door. <a href="/delivery" class="font-semibold text-flame-deep hover:underline">Delivery info</a> ·
+					<a href="/returns-policy" class="font-semibold text-flame-deep hover:underline">Returns policy</a>
 				</p>
 			</div>
 		</div>
@@ -383,7 +437,7 @@
 					<p class="mt-2 text-sm leading-relaxed text-muted">Pairs beautifully with {product.name} — tick what you want.</p>
 				</div>
 				<p class="text-sm font-semibold text-cocoa">
-					Total for selected: <span class="font-display text-xl font-bold text-flame">{formatPrice(fbtTotal)}</span>
+					Total for selected: <span class="font-display text-xl font-bold text-flame-deep">{formatPrice(fbtTotal)}</span>
 				</p>
 			</div>
 			<div class="mt-8 grid gap-4 sm:grid-cols-3">
@@ -407,7 +461,7 @@
 						</span>
 						<span class="min-w-0">
 							<span class="block truncate font-display text-base font-semibold text-ink">{p.name}</span>
-							<span class="mt-1 block text-sm font-bold text-flame">{formatPrice(p.price)}</span>
+							<span class="mt-1 block text-sm font-bold text-flame-deep">{formatPrice(p.price)}</span>
 							<span class="mt-0.5 block text-xs text-muted">{@render stars(p.rating, 'size-3')} {p.rating.toFixed(1)}</span>
 						</span>
 					</label>
@@ -417,7 +471,7 @@
 				type="button"
 				disabled={selectedFbt.size === 0}
 				onclick={addSelectedToBag}
-				class="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-flame disabled:opacity-40"
+				class="mt-6 inline-flex min-h-12 items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark disabled:opacity-40"
 			>
 				<Icon name="bag" class="size-4" /> Add selected to bag — {formatPrice(fbtTotal)}
 			</button>
@@ -446,7 +500,7 @@
 				>
 					<h3 class="font-display text-xl font-semibold text-ink">Write a review</h3>
 					{#if reviewError}
-						<p class="mt-3 rounded-2xl bg-flame/10 px-4 py-3 text-sm font-semibold text-flame" role="alert">
+						<p class="mt-3 rounded-2xl bg-flame/10 px-4 py-3 text-sm font-semibold text-flame-deep" role="alert">
 							{reviewError}
 						</p>
 					{/if}
@@ -491,7 +545,7 @@
 					></textarea>
 					<button
 						type="submit"
-						class="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="mt-5 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 					>
 						Submit review
 					</button>
@@ -521,7 +575,7 @@
 		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 			<div class="reveal flex flex-wrap items-end justify-between gap-4" use:reveal>
 				<h2 class="font-display text-2xl font-semibold text-ink sm:text-3xl">You may also like</h2>
-				<a href="/shop?category={product.category}" class="group inline-flex min-h-11 items-center gap-2 text-sm font-bold text-flame hover:text-flame-dark">
+				<a href="/shop?category={product.category}" class="group inline-flex min-h-11 items-center gap-2 text-sm font-bold text-flame-deep hover:text-flame-deep">
 					More in {category?.name ?? 'this category'}
 					<Icon name="arrow-right" class="size-4 transition-transform duration-300 group-hover:translate-x-1" />
 				</a>

@@ -55,7 +55,7 @@ export const articles: Article[] = [
 		slug: 'style-small-living-room',
 		title: '5 ways to style a small living room',
 		excerpt:
-			'Small rooms reward smart choices. Scale, legs, mirrors, vertical storage and one brave statement piece — five moves that make a compact living room feel generous.',
+			'Small rooms reward smart choices. Scale, legs, mirrors, vertical storage and one brave statement piece — five moves that make a compact room feel generous.',
 		date: 'Oct 21, 2026',
 		readTime: '5 min read',
 		cover: '/images/about-room.webp',
@@ -125,4 +125,10 @@ export const articles: Article[] = [
 
 export function getArticle(slug: string): Article | undefined {
 	return articles.find((a) => a.slug === slug);
+}
+
+/** Display date ("Nov 4, 2026") as an ISO date ("2026-11-04") for structured data. */
+export function isoDate(display: string): string {
+	const d = new Date(display);
+	return Number.isNaN(d.getTime()) ? display : d.toISOString().slice(0, 10);
 }

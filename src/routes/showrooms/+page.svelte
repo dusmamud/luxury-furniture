@@ -44,7 +44,7 @@
 <section class="bg-cream">
 	<div class="mx-auto max-w-7xl px-4 pt-12 pb-16 sm:px-6 sm:pt-16 lg:px-8">
 		<div class="reveal max-w-2xl" use:reveal>
-			<p class="text-sm font-bold tracking-[0.2em] text-flame uppercase">Showrooms</p>
+			<p class="text-sm font-bold tracking-[0.2em] text-flame-deep uppercase">Showrooms</p>
 			<h1 class="mt-3 font-display text-4xl leading-tight font-semibold text-ink sm:text-5xl">
 				Come sit on it first.
 			</h1>
@@ -62,7 +62,7 @@
 					style="--rd: {i * 100}ms"
 				>
 					<div class="bg-peach px-6 pt-6 pb-5">
-						<span class="inline-block rounded-full bg-flame px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
+						<span class="inline-block rounded-full bg-flame-dark px-3 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
 							{s.tag}
 						</span>
 						<h2 class="mt-3 font-display text-2xl font-semibold text-ink">{s.name}</h2>
@@ -70,13 +70,13 @@
 					</div>
 					<div class="flex flex-1 flex-col gap-4 px-6 py-6">
 						<div class="flex items-start gap-3">
-							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="pin" class="size-5" />
 							</span>
 							<p class="text-sm leading-relaxed text-cocoa">{s.address}</p>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="clock" class="size-5" />
 							</span>
 							<p class="text-sm leading-relaxed text-cocoa">
@@ -84,16 +84,16 @@
 							</p>
 						</div>
 						<div class="flex items-start gap-3">
-							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame">
+							<span class="grid size-10 shrink-0 place-items-center rounded-full bg-peach text-flame-deep">
 								<Icon name="phone" class="size-5" />
 							</span>
-							<a href={s.tel} class="text-sm leading-relaxed font-semibold text-cocoa hover:text-flame">{s.phone}</a>
+							<a href={s.tel} class="text-sm leading-relaxed font-semibold text-cocoa hover:text-flame-deep">{s.phone}</a>
 						</div>
 						<a
 							href={mapsUrl(s.address)}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+							class="mt-auto inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 						>
 							<Icon name="pin" class="size-4" /> Get directions
 						</a>
@@ -115,7 +115,7 @@
 				<div class="flex flex-wrap gap-3 lg:justify-end">
 					<a
 						href="/shop"
-						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-dark"
+						class="inline-flex min-h-11 items-center gap-2 rounded-full bg-flame-dark px-6 py-3 text-sm font-bold text-white transition hover:bg-flame-deep"
 					>
 						Browse online <Icon name="arrow-right" class="size-4" />
 					</a>
